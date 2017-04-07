@@ -1,9 +1,9 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
-import * as actions from '../../actions';
+import * as actions from 'actions';
 
-import Header from '../../components/Header/Header';
+import Header from 'components/Header/Header';
 
 class Subreddit extends Component {
     componentDidMount() {
@@ -22,7 +22,7 @@ class Subreddit extends Component {
                 : null}
             {!this.props.isFetching && this.props.posts && this.props.posts.data
                 ? <ul>
-                    {this.props.posts.data.children.map(post => <li>{post.data.post_hint}</li>)}
+                    {this.props.posts.data.children.map(post => <li><a href={post.data.permalink}>{post.data.ups}</a> | {post.data.title}</li>)}
                 </ul>
                 : null}
         </div>
@@ -33,7 +33,6 @@ function mapStateToProps(state, props) {
     const { postsBySubreddit } = state
     const {
         isFetching,
-        lastUpdated,
         items: posts
     } = postsBySubreddit[props.subreddit] || {
         isFetching: true,
@@ -42,8 +41,7 @@ function mapStateToProps(state, props) {
 
     return {
         posts,
-        isFetching,
-        lastUpdated
+        isFetching
     }
 }
 

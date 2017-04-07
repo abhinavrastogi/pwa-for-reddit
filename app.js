@@ -5,6 +5,7 @@ import configureStore from './configureStore';
 
 import Homepage from 'pages/Homepage/Homepage';
 import Subreddit from 'pages/Subreddit/Subreddit';
+import Comments from 'pages/Comments/Comments';
 
 const store = configureStore();
 const App = () => (
@@ -12,6 +13,7 @@ const App = () => (
         <Router>
             <Homepage path='/' />
             <Subreddit path='/r/:subreddit' />
+            <Comments path='/r/:subreddit/comments/:post_id/:post_title' />
         </Router>
     </Provider>
 )

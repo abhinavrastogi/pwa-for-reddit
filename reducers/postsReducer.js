@@ -1,7 +1,6 @@
-import { combineReducers } from 'redux'
 import {
   REQUEST_POSTS, RECEIVE_POSTS
-} from './actions'
+} from '../actions'
 
 function posts(state = {
   isFetching: false,
@@ -26,7 +25,7 @@ function posts(state = {
   }
 }
 
-function postsBySubreddit(state = { }, action) {
+export default function postsBySubreddit(state = { }, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
@@ -37,9 +36,3 @@ function postsBySubreddit(state = { }, action) {
       return state
   }
 }
-
-const rootReducer = combineReducers({
-  postsBySubreddit
-})
-
-export default rootReducer

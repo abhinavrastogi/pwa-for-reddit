@@ -11,8 +11,18 @@ function* fetchPosts(action) {
    }
 }
 
+function* fetchComments(action) {
+   try {
+      const comments = yield call(Api.fetchComments, action.subreddit, action.post_id, action.post_title);
+      yield put({type: actions.RECEIVE_COMMENTS, comments, subreddit: action.subreddit});
+   } catch (e) {
+      yield put({type: actions.FAILED_REQUEST_COMMENTS, message: e.message});
+   }
+}
+
 function* mySaga() {
   yield takeLatest(actions.REQUEST_POSTS, fetchPosts);
+  yield takeLatest(actions.REQUEST_COMMENTS, fetchComments);
 }
 
 export default mySaga;

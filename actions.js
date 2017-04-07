@@ -2,36 +2,6 @@ export const REQUEST_POSTS = 'REQUEST_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const FAILED_REQUEST_POSTS = 'FAILED_REQUEST_POSTS'
 
-function requestPosts(subreddit) {
-  return {
-    type: REQUEST_POSTS,
-    subreddit
-  }
-}
-
-function receivePosts(subreddit, json) {
-  return {
-    type: RECEIVE_POSTS,
-    subreddit,
-    posts: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
-  }
-}
-
-export function fetchPosts(subreddit) {
-  // return dispatch => {
-  //   dispatch(requestPosts(subreddit))
-  //   return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-  //     .then(response => response.json())
-  //     .then(json => dispatch(receivePosts(subreddit, json)));
-  // }
-  return receivePosts(subreddit, {
-      data: {
-          children: [
-              {
-                  data: 'bar'
-              }
-          ]
-      }
-  });
-}
+export const REQUEST_COMMENTS = 'REQUEST_COMMENTS'
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+export const FAILED_REQUEST_COMMENTS = 'FAILED_REQUEST_COMMENTS'
