@@ -1,7 +1,17 @@
+<!DOCTYPE html>
 <html>
-    <head></head>
-    <body>
-        <div id="root"></div>
-        <script src="/bundle.js"></script>
-    </body>
+<head>
+    <title>PWA for Reddit</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+    </script>
+    <script src="/app.js"></script>
+</body>
 </html>
