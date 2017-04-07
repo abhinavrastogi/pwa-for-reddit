@@ -3,8 +3,8 @@ import { Router } from 'preact-router';
 import { Provider } from 'preact-redux';
 import configureStore from './configureStore';
 
-import Homepage from './pages/Homepage/Homepage';
-import Subreddit from './pages/Subreddit/Subreddit';
+import Homepage from 'pages/Homepage/Homepage';
+import Subreddit from 'pages/Subreddit/Subreddit';
 
 const store = configureStore();
 const App = () => (

@@ -20,7 +20,7 @@ class Subreddit extends Component {
             {this.props.isFetching
                 ? 'Loading...'
                 : null}
-            {this.props.posts && this.props.posts.data
+            {!this.props.isFetching && this.props.posts && this.props.posts.data
                 ? <ul>
                     {this.props.posts.data.children.map(post => <li>{post.data.post_hint}</li>)}
                 </ul>

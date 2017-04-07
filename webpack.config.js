@@ -18,6 +18,10 @@ module.exports = {
         ]
     },
     resolve: {
+        modules: [
+            "node_modules",
+            path.resolve(__dirname),
+        ],
         alias: {
             'react': 'preact-compat',
             'react-dom': 'preact-compat'
