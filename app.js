@@ -1,7 +1,7 @@
 import { h, render, Component } from 'preact';
 import { Router } from 'preact-router';
-import configureStore from './configureStore';
 import { Provider } from 'preact-redux';
+import configureStore from './configureStore';
 
 import Homepage from './pages/Homepage/Homepage';
 import Subreddit from './pages/Subreddit/Subreddit';

@@ -1,14 +1,17 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
-import { fetchPosts } from '../../actions';
+import * as actions from '../../actions';
 
 import Header from '../../components/Header/Header';
 
 class Subreddit extends Component {
     componentDidMount() {
-        const { dispatch } = this.props
-        dispatch(fetchPosts(this.props.subreddit))
+        const { dispatch } = this.props;
+        dispatch({
+            type: actions.REQUEST_POSTS,
+            subreddit: this.props.subreddit
+        });
     }
 
     render() {
@@ -17,9 +20,9 @@ class Subreddit extends Component {
             {this.props.isFetching
                 ? 'Loading...'
                 : null}
-            {!this.props.isFetching && this.props.posts
+            {this.props.posts && this.props.posts.data
                 ? <ul>
-                    {this.props.posts.map(post => <li>{post}</li>)}
+                    {this.props.posts.data.children.map(post => <li>{post.data.post_hint}</li>)}
                 </ul>
                 : null}
         </div>

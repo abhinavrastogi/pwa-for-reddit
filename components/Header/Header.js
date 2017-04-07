@@ -5,7 +5,7 @@ export default class Header extends Component {
         return <div>
             Header<br/>
             <a href='/'>Home</a><br/>
-            <a href='/r/hello'>Hello Subreddit</a>
+            <a href='/r/popular'>Hello Subreddit</a>
             <hr/>
         </div>
     }

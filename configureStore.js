@@ -1,9 +1,19 @@
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
+import createSagaMiddleware from 'redux-saga';
 
-export default function configureStore(preloadedState) {
-  return createStore(
-    rootReducer,
-    preloadedState
-  )
+import rootReducer from './reducers';
+import mySaga from './sagas';
+
+const sagaMiddleware = createSagaMiddleware();
+
+function configureStore(preloadedState) {
+    let store = createStore(
+        rootReducer,
+        preloadedState,
+        applyMiddleware(sagaMiddleware)
+    );
+    sagaMiddleware.run(mySaga);
+    return store;
 };
+
+export default configureStore;
