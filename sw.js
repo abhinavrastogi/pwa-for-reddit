@@ -1,6 +1,6 @@
 import toolbox from 'sw-toolbox';
 
-var version = 1;
+var version = 2;
 var cacheList = ['static', 'posts', 'comments'];
 var currentCaches = {};
 cacheList.forEach(cache => {
@@ -27,6 +27,24 @@ self.addEventListener('activate', event => {
 	);
 });
 
-toolbox.router.get('/*\.js', toolbox.cacheFirst, { cache: { name: currentCaches['static'] } });
-toolbox.router.get('/r/:subreddit/comments/:post_id/*', toolbox.cacheFirst, { origin: 'https://www.reddit.com', cache: { name: currentCaches['comments'] } });
-toolbox.router.get('/r/*', toolbox.cacheFirst, { origin: 'https://www.reddit.com', cache: { name: currentCaches['posts'] } });
+// toolbox.router.get('/*\.js', toolbox.cacheFirst, {
+//     cache: {
+//         name: currentCaches['static'],
+//         maxEntries: 2,
+//         maxAgeSeconds: 60 * 60 * 24
+//     }
+// });
+toolbox.router.get('/r/:subreddit/comments/:post_id/*', toolbox.fastest, {
+    origin: 'https://www.reddit.com',
+    cache: {
+        name: currentCaches['comments'],
+        maxAgeSeconds: 60 * 60 * 24
+    }
+});
+toolbox.router.get('/r/*', toolbox.fastest, {
+    origin: 'https://www.reddit.com',
+    cache: {
+        name: currentCaches['posts'],
+        maxAgeSeconds: 60 * 60 * 24
+    }
+});

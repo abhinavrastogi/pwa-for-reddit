@@ -1,9 +1,11 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
-
 import * as actions from 'actions';
 
 import Header from 'components/Header/Header';
+import PostSummary from 'components/PostSummary/PostSummary';
+
+// import * as styles from './SubredditStyles.js';
 
 class Subreddit extends Component {
     componentDidMount() {
@@ -21,9 +23,9 @@ class Subreddit extends Component {
                 ? 'Loading...'
                 : null}
             {!this.props.isFetching && this.props.posts && this.props.posts.data
-                ? <ul>
-                    {this.props.posts.data.children.map(post => <li><a href={post.data.permalink}>{post.data.ups}</a> | {post.data.title}</li>)}
-                </ul>
+                ? <div>
+                    {this.props.posts.data.children.map(post => <PostSummary data={post.data} showSubreddit={post.data.subreddit!=this.props.subreddit} />)}
+                </div>
                 : null}
         </div>
     }

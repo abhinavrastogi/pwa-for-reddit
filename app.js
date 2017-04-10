@@ -2,6 +2,7 @@ import { h, render, Component } from 'preact';
 import { Router } from 'preact-router';
 import { Provider } from 'preact-redux';
 import configureStore from './configureStore';
+import reset from 'glamor/reset';
 
 import Homepage from 'pages/Homepage/Homepage';
 import Subreddit from 'pages/Subreddit/Subreddit';
