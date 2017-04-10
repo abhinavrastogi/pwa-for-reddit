@@ -26,7 +26,7 @@ class Comment extends Component {
                 <div {...styles.text}>
                     {data.body}
                     {this.state.showReplies
-                        ? <div>
+                        ? <div {...styles.replies}>
                             {data.replies
                                 ? data.replies.data.children.map(comment => comment.kind === 't1' ? <Comment data={comment.data} /> : null)
                                 : null
@@ -36,8 +36,8 @@ class Comment extends Component {
                     }
                 </div>
                 <div {...styles.postMeta}>
-                    <span {...postStyles.upvoteIcon}>&#10148;</span> {Number(data.ups).toLocaleString()}
-                    {data.replies.data ? <span {...styles.repliesCount} onClick={this.toggleReplies.bind(this)}>{Number(data.replies.data.children.length).toLocaleString()} Replies</span> : null}
+                    <span {...styles.repliesCount}><span {...postStyles.upvoteIcon}>&#10148;</span> {Number(data.ups).toLocaleString()}</span>
+                    {data.replies.data && data.replies.data.children.length > 1 ? <span {...styles.repliesCount} onClick={this.toggleReplies.bind(this)}>{Number(data.replies.data.children.length - 1).toLocaleString()} Replies</span> : null}
                 </div>
             </div>
     }

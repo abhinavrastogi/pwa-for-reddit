@@ -42,7 +42,8 @@ export const sublinks = css({
 export const linkComments = css({
     // 'font-size': '12px'
     textDecoration: 'none',
-    color: '#666'
+    color: '#666',
+    padding: '10px'
 });
 
 export const linkAuthor = css({

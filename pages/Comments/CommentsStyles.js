@@ -28,3 +28,7 @@ export const repliesCount = css({
     padding: '10px',
     display: 'inline-block'
 });
+
+export const replies = css({
+    marginTop: '10px'
+});
