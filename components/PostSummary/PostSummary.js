@@ -4,7 +4,7 @@ import * as styles from './PostSummaryStyles';
 
 export default class PostSummary extends Component {
     render() {
-        const ignoredThumbnails = ['self', 'default', 'spoiler', ''];
+        const ignoredThumbnails = ['self', 'default', 'spoiler', 'nsfw', ''];
 
         return <div {...styles.container}>
             <div {...styles.image}>{ignoredThumbnails.indexOf(this.props.data.thumbnail) === -1 ? <img src={this.props.data.thumbnail} width={75} /> : null }</div>
