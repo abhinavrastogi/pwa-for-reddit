@@ -1,11 +1,11 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
-import PostSummary from 'components/PostSummary/PostSummary';
-import * as actions from 'actions';
+import PostSummary from '../../components/PostSummary/PostSummary';
+import * as actions from '../../actions';
 
 import * as styles from './CommentsStyles.js';
-import * as postStyles from 'components/PostSummary/PostSummaryStyles.js';
+import * as postStyles from '../../components/PostSummary/PostSummaryStyles.js';
 
 class Comment extends Component {
     constructor(props) {

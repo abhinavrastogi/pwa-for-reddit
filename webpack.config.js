@@ -17,17 +17,13 @@ module.exports = function(env) {
                 {
                     test: /.js$/,
                     exclude: [
-                        path.resolve(__dirname, "node_modules")
+                        /node_modules/
                     ],
                     loader: 'babel-loader'
                 }
             ]
         },
         resolve: {
-            modules: [
-                "node_modules",
-                path.resolve(__dirname),
-            ],
             alias: {
                 'react': 'preact-compat',
                 'react-dom': 'preact-compat'
