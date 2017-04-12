@@ -24,8 +24,6 @@ module.exports = function(env) {
             ]
         },
         resolve: {
-            modules: ["node_modules", __dirname],
-            extensions: ['.js', '.jsx', '*'],
             alias: {
                 'react': 'preact-compat',
                 'react-dom': 'preact-compat'
