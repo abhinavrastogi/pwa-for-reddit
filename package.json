@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack",
-        "start": "webpack --env.production && node server.js"
+        "start": "webpack --env.production --display-error-details && node server.js"
     },
     "keywords": [
         "pwa",
