@@ -6,7 +6,7 @@ const fs = require('fs');
 const app = express();
 const port = 8080;
 
-app.use(express.static('build'));
+app.use(express.static('static'));
 
 app.get('*', (req, res) => {
   res.type('html').sendFile(path.join(__dirname, 'index.html'));
