@@ -17,8 +17,10 @@ const credentials = {
     cert:  fs.readFileSync(path.join(__dirname, 'certificates', 'my.flipkart.com.crt'))
 };
 
-spdy
-  .createServer(credentials, app)
-  .listen(port, (error) => {
-    console.log('H2 server listening on port: ' + port);
-});
+app.listen(port);
+
+// spdy
+//   .createServer(credentials, app)
+//   .listen(port, (error) => {
+//     console.log('H2 server listening on port: ' + port);
+// });
