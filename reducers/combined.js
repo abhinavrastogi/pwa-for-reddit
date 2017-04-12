@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import postsBySubreddit from 'reducers/postsReducer';
-import commentsBySubreddit from 'reducers/commentsReducer';
+import postsBySubreddit from './postsReducer';
+import commentsBySubreddit from './commentsReducer';
 
 const rootReducer = combineReducers({
   postsBySubreddit,

@@ -4,9 +4,9 @@ import { Provider } from 'preact-redux';
 import configureStore from './configureStore';
 // import reset from 'glamor/reset';
 
-import Homepage from 'pages/Homepage/Homepage';
-import Subreddit from 'pages/Subreddit/Subreddit';
-import Comments from 'pages/Comments/Comments';
+import Homepage from './pages/Homepage/Homepage';
+import Subreddit from './pages/Subreddit/Subreddit';
+import Comments from './pages/Comments/Comments';
 
 const store = configureStore();
 const App = () => (

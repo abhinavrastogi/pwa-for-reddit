@@ -1,9 +1,9 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
-import * as actions from 'actions';
+import * as actions from '../../actions';
 
-import Header from 'components/Header/Header';
-import PostSummary from 'components/PostSummary/PostSummary';
+import Header from '../../components/Header/Header';
+import PostSummary from '../../components/PostSummary/PostSummary';
 
 import * as styles from './SubredditStyles.js';
 
