@@ -4,7 +4,7 @@ const spdy = require('spdy');
 const fs = require('fs');
 
 const app = express();
-const port = 80;
+const port = 8080;
 
 app.use(express.static('build'));
 
@@ -17,7 +17,7 @@ app.get('*', (req, res) => {
 //     cert:  fs.readFileSync(path.join(__dirname, 'certificates', 'my.flipkart.com.crt'))
 // };
 
-app.listen(port);
+app.listen(process.env.PORT || port);
 
 // spdy
 //   .createServer(credentials, app)
