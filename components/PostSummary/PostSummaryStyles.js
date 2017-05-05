@@ -31,7 +31,8 @@ export const titleRow = css({
 export const votes = css({
     margin: 'auto',
     fontWeight: 'bold',
-    paddingRight: '10px'
+    paddingRight: '10px',
+    color: '#666'
 });
 
 export const title = css({
@@ -42,7 +43,7 @@ export const title = css({
 export const links = css({
     marginTop: '10px',
     fontSize: 'smaller',
-    color: '#555',
+    color: '#666',
     lineHeight: '1.5'
 });
 
@@ -55,18 +56,4 @@ export const linkItem = css({
 export const iconComments = css({
     width: '13px',
     verticalAlign: 'middle'
-});
-
-export const linkAuthor = css({
-
-});
-
-export const linkSubreddit = css({
-
-});
-
-export const upvoteIcon = css({
-    transform: 'rotate(-90deg)',
-    display: 'inline-block',
-    fontSize: 'smaller'
 });

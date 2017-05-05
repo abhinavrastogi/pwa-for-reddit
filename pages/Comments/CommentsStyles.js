@@ -1,17 +1,27 @@
 import { css } from 'glamor';
 
 export const page = css({
-    backgroundColor: '#f6f6f6'
+    color: '#ccc'
 });
 
 export const comment = css({
-    margin: '5px',
-    padding: '10px 10px 0 10px',
-    border: '1px solid #ddd',
-    backgroundColor: '#fff'
+    padding: '10px 0',
+    borderBottom: '1px dashed #333'
 });
 
-export const user = css({
+export const bodyRow = css({
+    display: 'flex'
+});
+
+export const body = css({
+    flex: 1,
+    lineHeight: '1.3'
+});
+
+export const upvotes = css({
+    margin: 'auto',
+    fontWeight: 'bold',
+    paddingRight: '10px',
     color: '#666'
 });
 
@@ -25,10 +35,13 @@ export const postMeta = css({
 });
 
 export const repliesCount = css({
-    padding: '10px',
-    display: 'inline-block'
+    padding: '5px 0',
+    display: 'inline-block',
+    color: '#999'
 });
 
 export const replies = css({
-    marginTop: '10px'
+    marginLeft: '15px',
+    borderLeft: '1px solid #333',
+    paddingLeft: '20px'
 });

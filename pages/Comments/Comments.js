@@ -6,6 +6,7 @@ import * as actions from '../../actions';
 
 import * as styles from './CommentsStyles.js';
 import * as postStyles from '../../components/PostSummary/PostSummaryStyles.js';
+import {formatToK, formatTimeAgo} from '../../utils';
 
 class Comment extends Component {
     constructor(props) {
@@ -22,9 +23,11 @@ class Comment extends Component {
     }
     render({data}) {
         return <div {...styles.comment}>
-                <div {...styles.user}>{`/u/${this.props.data.author}`}</div>
                 <div {...styles.text}>
-                    {data.body}
+                    <div {...styles.bodyRow}>
+                        <div {...styles.upvotes}>{formatToK(data.ups)}</div>
+                        <div {...styles.body}>{data.body}</div>
+                    </div>
                     {this.state.showReplies
                         ? <div {...styles.replies}>
                             {data.replies
@@ -35,9 +38,10 @@ class Comment extends Component {
                         : null
                     }
                 </div>
-                <div {...styles.postMeta}>
-                    <span {...styles.repliesCount}><span {...postStyles.upvoteIcon}>&#10148;</span> {Number(data.ups).toLocaleString()}</span>
-                    {data.replies.data && data.replies.data.children.length > 1 ? <span {...styles.repliesCount} onClick={this.toggleReplies.bind(this)}>{Number(data.replies.data.children.length - 1).toLocaleString()} Replies</span> : null}
+                <div {...styles.postMeta} onClick={this.toggleReplies.bind(this)}>
+                    <span>{`u/${this.props.data.author} `}</span>
+                    posted <span {...styles.repliesCount}>{formatTimeAgo(data.created_utc)}&nbsp;</span>
+                    {data.replies.data && data.replies.data.children.length > 1 ? <span>with <a {...styles.repliesCount}>{formatToK(data.replies.data.children.length - 1)} Replies</a></span> : null}
                 </div>
             </div>
     }
