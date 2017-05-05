@@ -12,6 +12,7 @@ const formatTimeAgo = timestamp => {
     if(timeAgo < 60) return `${timeAgo}s${postfix}`
     else if(timeAgo < 60*60) return `${Math.round(timeAgo/60)}m${postfix}`
     else if(timeAgo < 60*60*24) return `${Math.round(timeAgo/(60*24))}h${postfix}`
+    else if(timeAgo < 60*60*24*365) return `${Math.round(timeAgo/(60*24*365))}d${postfix}`
 }
 
 export default class PostSummary extends Component {
@@ -28,8 +29,6 @@ export default class PostSummary extends Component {
         });
     }
     render({data, showSubreddit}, {fullImage}) {
-        const ignoredThumbnails = ['self', 'default', 'spoiler', 'nsfw', ''];
-
         return <div {...styles.container}>
                 <div {...styles.titleRow}>
                   <a {...styles.votes}>{formatToK(data.ups)}</a>
