@@ -1,8 +1,8 @@
 import { css } from 'glamor';
 
 export const container = css({
-    padding: '10px 0',
-    borderBottom:'1px solid #333'
+    padding: '10px 1px',
+    borderBottom:'1px dashed #333'
 });
 
 export const imageContainer = full => css({

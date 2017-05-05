@@ -11,8 +11,8 @@ const formatTimeAgo = timestamp => {
 
     if(timeAgo < 60) return `${timeAgo}s${postfix}`
     else if(timeAgo < 60*60) return `${Math.round(timeAgo/60)}m${postfix}`
-    else if(timeAgo < 60*60*24) return `${Math.round(timeAgo/(60*24))}h${postfix}`
-    else if(timeAgo < 60*60*24*365) return `${Math.round(timeAgo/(60*24*365))}d${postfix}`
+    else if(timeAgo < 60*60*24) return `${Math.round(timeAgo/(60*60))}h${postfix}`
+    else if(timeAgo < 60*60*24*365) return `${Math.round(timeAgo/(60*60*24))}d${postfix}`
 }
 
 export default class PostSummary extends Component {
