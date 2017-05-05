@@ -43,7 +43,7 @@ export default class PostSummary extends Component {
                     By <a {...styles.linkItem}>{`u/${data.author}`}</a>
                     in {showSubreddit ? <a {...styles.linkItem}>{`r/${data.subreddit}`}</a> : null }
                     posted <span {...styles.linkItem}>{formatTimeAgo(data.created_utc)}</span>
-                    having <a {...styles.linkItem} href={data.permalink}>{formatToK(data.num_comments)} <img src='images/comments.png' {...styles.iconComments} /></a>
+                    having <a {...styles.linkItem} href={data.permalink}>{formatToK(data.num_comments)} <img src='/images/comments.png' {...styles.iconComments} /></a>
                 </div>
         </div>
     }
