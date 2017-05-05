@@ -5,7 +5,7 @@ import * as actions from 'actions';
 import Header from 'components/Header/Header';
 import PostSummary from 'components/PostSummary/PostSummary';
 
-// import * as styles from './SubredditStyles.js';
+import * as styles from './SubredditStyles.js';
 
 class Subreddit extends Component {
     componentDidMount() {
@@ -17,7 +17,7 @@ class Subreddit extends Component {
     }
 
     render() {
-        return <div>
+        return <div {...styles.container}>
             <Header />
             {this.props.isFetching
                 ? 'Loading...'
