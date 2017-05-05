@@ -8,6 +8,10 @@ import PostSummary from '../../components/PostSummary/PostSummary';
 import * as styles from './SubredditStyles.js';
 
 class Subreddit extends Component {
+    constructor() {
+        super();
+        window.iw = window.innerWidth;
+    }
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch({
@@ -20,7 +24,7 @@ class Subreddit extends Component {
         return <div {...styles.container}>
             <Header />
             {this.props.isFetching
-                ? 'Loading...'
+                ? <div {...styles.loading}>Loading</div>
                 : null}
             {!this.props.isFetching && this.props.posts && this.props.posts.data
                 ? <div>
