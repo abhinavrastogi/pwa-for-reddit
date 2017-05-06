@@ -31,7 +31,7 @@ export default class PostSummary extends Component {
                 <div {...styles.titleRow}>
                   <a {...styles.votes}>{formatToK(data.ups)}</a>
                   <div {...styles.title}>{data.title}</div>
-                  {gif_url && !fullImage ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
+                  {(gif_url || (data.post_hint === 'link' && data.thumbnail !== 'default')) && !fullImage ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
                 </div>
                 {img_url && data.post_hint === 'image' && !gif_url ? <div {...styles.imageContainer(fullImage || img_height < 600)} onClick={this.toggleImage}>
                   <img src={img_url} {...styles.image} />
@@ -39,6 +39,9 @@ export default class PostSummary extends Component {
                 </div> : null }
                 {fullImage && gif_url ? <div {...styles.imageContainer(fullImage)} onClick={this.toggleImage}>
                     <img src={gif_url} {...styles.image} />
+                </div> : null }
+                {fullImage && !gif_url && data.post_hint === 'link' ? <div {...styles.imageContainer(fullImage)} onClick={this.toggleImage}>
+                    <img src={img_url} {...styles.image} />
                 </div> : null }
                 <div {...styles.links}>
                     By <span {...styles.linkItem}>{`u/${data.author}`}</span>
