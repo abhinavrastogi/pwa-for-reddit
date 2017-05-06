@@ -12,7 +12,7 @@ class Header extends Component {
         });
     }
     shouldComponentUpdate(nextProps) {
-        return this.props.title !== nextProps.title || this.props.info !== nextProps.info
+        return this.props.title !== nextProps.title || this.props.userInfo !== nextProps.userInfo
     }
     render({name}) {
         return <div {...styles.headerContainer}>
