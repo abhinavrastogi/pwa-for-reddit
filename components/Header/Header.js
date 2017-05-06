@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
+// import { withRouter } from 'react-router-dom';
 
 import * as styles from './HeaderStyles.js';
 import * as actions from '../../actions';
@@ -11,12 +12,9 @@ class Header extends Component {
             type: actions.REQUEST_USER
         });
     }
-    shouldComponentUpdate(nextProps) {
-        return this.props.title !== nextProps.title || this.props.userInfo !== nextProps.userInfo
-    }
     render({name}) {
         return <div {...styles.headerContainer}>
-            <div {...styles.title}>{this.props.title}</div>
+            <div {...styles.title}></div>
             {name ? <span {...styles.user}>{name}</span> : <a {...styles.user} href='https://www.reddit.com/api/v1/authorize.compact?client_id=u9-0jmBsXJw4tQ&response_type=code&state=RANDOM_STRING&redirect_uri=http%3A%2F%2Fpwa-for-reddit.herokuapp.com%2Fauth&duration=permanent&scope=read,vote,identity'>Login</a>}
         </div>
     }

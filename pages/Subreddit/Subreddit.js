@@ -22,7 +22,8 @@ class Subreddit extends Component {
 
     render() {
         return <div {...styles.container}>
-            <Header title={`/r/${this.props.subreddit || this.props.match.params.subreddit}`}/>
+            {/*<Header title={`/r/${this.props.subreddit || this.props.match.params.subreddit}`}/>*/}
+            <div {...styles.title}>{`/r/${this.props.subreddit || this.props.match.params.subreddit}`}</div>
             {this.props.isFetching
                 ? <div {...styles.loading}>Loading</div>
                 : null}
