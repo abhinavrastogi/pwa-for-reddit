@@ -37,7 +37,13 @@ export const votes = css({
 
 export const title = css({
     flex: 1,
-    lineHeight: '1.3'
+    lineHeight: '1.3',
+    margin: 'auto'
+});
+
+export const gif_thumb = css({
+    width: '75px',
+    height: '75px'
 });
 
 export const links = css({

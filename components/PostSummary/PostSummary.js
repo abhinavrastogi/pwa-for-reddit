@@ -17,27 +17,28 @@ export default class PostSummary extends Component {
         });
     }
     render({data, showSubreddit}, {fullImage}) {
-        let img_url = '', img_type = '', img_height;
+        let img_url = '', img_height, gif_url = '';
         if(data.preview) {
             let aspect_ratio = data.preview.images[0].source.height / data.preview.images[0].source.width;
             img_height = aspect_ratio * window.iw;
-        }
-        if(data.preview && data.preview.images[0].variants && data.preview.images[0].variants.gif) {
-            img_url = data.preview.images[0].variants.gif.source.url;
-            img_type = 'gif';
-        } else if(data.preview) {
             img_url = data.preview.images[0].source.url;
-            img_type = 'img';
+            if (data.preview.images[0].variants && data.preview.images[0].variants.gif) {
+                gif_url = data.preview.images[0].variants.gif.source.url;
+            }
         }
 
         return <div {...styles.container}>
                 <div {...styles.titleRow}>
                   <a {...styles.votes}>{formatToK(data.ups)}</a>
                   <div {...styles.title}>{data.title}</div>
+                  {gif_url && !fullImage ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
                 </div>
-                {img_url && img_type === 'img' && data.post_hint === 'image' ? <div {...styles.imageContainer(fullImage || img_height < 600)} onClick={this.toggleImage}>
+                {img_url && data.post_hint === 'image' && !gif_url ? <div {...styles.imageContainer(fullImage || img_height < 600)} onClick={this.toggleImage}>
                   <img src={img_url} {...styles.image} />
                   {!fullImage && img_height > 600 ? <div {...styles.shade} /> : null}
+                </div> : null }
+                {fullImage && gif_url ? <div {...styles.imageContainer(fullImage)} onClick={this.toggleImage}>
+                    <img src={gif_url} {...styles.image} />
                 </div> : null }
                 <div {...styles.links}>
                     By <span {...styles.linkItem}>{`u/${data.author}`}</span>
