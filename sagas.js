@@ -41,7 +41,7 @@ function* fetchUser() {
 function* mySaga() {
   yield takeLatest(actions.REQUEST_POSTS, fetchPosts);
   yield takeLatest(actions.REQUEST_COMMENTS, fetchComments);
-  yield takeLatest(actions.REQUEST_USER, fetchComments);
+  yield takeLatest(actions.REQUEST_USER, fetchUser);
 }
 
 export default mySaga;

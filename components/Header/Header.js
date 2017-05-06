@@ -1,8 +1,15 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import * as styles from './HeaderStyles.js';
+import * as actions from '../../actions';
 
 class Header extends Component {
+    componentWillMount() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: actions.REQUEST_USER
+        });
+    }
     render({name}) {
         return <div {...styles.headerContainer}>
             <div {...styles.title}>{this.props.title}</div>
