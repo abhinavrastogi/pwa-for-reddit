@@ -4,6 +4,7 @@ import * as Api from './api';
 
 function* fetchPosts(action) {
    try {
+      Api.fetchUserInfo();
       const posts = yield call(Api.fetchPosts, action.subreddit);
       yield put({type: actions.RECEIVE_POSTS, posts, subreddit: action.subreddit});
    } catch (e) {
