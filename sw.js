@@ -1,14 +1,21 @@
 import toolbox from 'sw-toolbox';
 
 var version = 2;
-var cacheList = ['static', 'posts', 'comments'];
+var cacheList = ['static', 'posts', 'comments', 'html'];
 var currentCaches = {};
 cacheList.forEach(cache => {
 	currentCaches[cache] = cache + version;
 });
 
 self.addEventListener('install', event => {
-    event.waitUntil(self.skipWaiting());
+	event.waitUntil(
+		caches.open(`posts${version}`).then(cache => {
+			cache.addAll([
+				'/r/popular.json'
+			]);
+			return self.skipWaiting();
+		})
+	);
 });
 
 self.addEventListener('activate', event => {
@@ -27,24 +34,29 @@ self.addEventListener('activate', event => {
 	);
 });
 
-// toolbox.router.get('/*\.js', toolbox.cacheFirst, {
-//     cache: {
-//         name: currentCaches['static'],
-//         maxEntries: 2,
-//         maxAgeSeconds: 60 * 60 * 24
-//     }
-// });
+toolbox.router.get('/*\.js', toolbox.fastest, {
+    cache: {
+        name: currentCaches['static'],
+        maxEntries: 2
+    }
+});
 toolbox.router.get('/r/:subreddit/comments/:post_id/*', toolbox.fastest, {
     origin: 'https://www.reddit.com',
     cache: {
         name: currentCaches['comments'],
-        maxAgeSeconds: 60 * 60 * 24
+        maxEntries: 20
     }
 });
 toolbox.router.get('/r/*', toolbox.fastest, {
     origin: 'https://www.reddit.com',
     cache: {
         name: currentCaches['posts'],
-        maxAgeSeconds: 60 * 60 * 24
+        maxEntries: 10
+    }
+});
+toolbox.router.get('/', toolbox.fastest, {
+    cache: {
+        name: currentCaches['html'],
+        maxEntries: 1
     }
 });

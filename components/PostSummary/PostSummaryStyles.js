@@ -41,7 +41,7 @@ export const title = css({
 });
 
 export const links = css({
-    marginTop: '10px',
+    marginTop: '5px',
     fontSize: 'smaller',
     color: '#666',
     lineHeight: '1.5'

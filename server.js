@@ -10,7 +10,7 @@ app.use(express.static('build'));
 app.use(express.static('static'));
 
 app.get('*', (req, res) => {
-  res.type('html').sendFile(path.join(__dirname, 'index.html'));
+  res.type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
 });
 
 // const credentials = {

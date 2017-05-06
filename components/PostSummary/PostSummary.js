@@ -35,7 +35,7 @@ export default class PostSummary extends Component {
                   <a {...styles.votes}>{formatToK(data.ups)}</a>
                   <div {...styles.title}>{data.title}</div>
                 </div>
-                {img_url && img_type === 'img' ? <div {...styles.imageContainer(fullImage || img_height < 600)} onClick={this.toggleImage}>
+                {img_url && img_type === 'img' && data.post_hint === 'image' ? <div {...styles.imageContainer(fullImage || img_height < 600)} onClick={this.toggleImage}>
                   <img src={img_url} {...styles.image} />
                   {!fullImage && img_height > 600 ? <div {...styles.shade} /> : null}
                 </div> : null }
