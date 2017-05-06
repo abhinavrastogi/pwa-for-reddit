@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
+import Header from '../../components/Header/Header';
 import PostSummary from '../../components/PostSummary/PostSummary';
 import * as actions from '../../actions';
 
@@ -52,14 +53,15 @@ class Comments extends Component {
         const { dispatch } = this.props;
         dispatch({
             type: actions.REQUEST_COMMENTS,
-            subreddit: this.props.subreddit,
-            post_id: this.props.post_id,
-            post_title: this.props.post_title
+            subreddit: this.props.subreddit || this.props.match.params.subreddit,
+            post_id: this.props.match.params.post_id,
+            post_title: this.props.match.params.post_title
         });
     }
     render() {
         return !this.props.isFetching
             ? <div {...styles.page}>
+                <Header title='Comments' />
                 <PostSummary data={this.props.comments[0].data.children[0].data} />
                 {this.props.comments[1].data.children.map(comment => comment.kind === 't1' ? <Comment data={comment.data} /> : null)}
             </div>
@@ -72,7 +74,7 @@ function mapStateToProps(state, props) {
     const {
         isFetching,
         items: comments
-    } = commentsBySubreddit[props.subreddit] || {
+    } = commentsBySubreddit[props.subreddit || props.match.params.subreddit] || {
         isFetching: true,
         items: []
     }

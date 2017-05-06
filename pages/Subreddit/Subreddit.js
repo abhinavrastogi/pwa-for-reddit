@@ -16,13 +16,13 @@ class Subreddit extends Component {
         const { dispatch } = this.props;
         dispatch({
             type: actions.REQUEST_POSTS,
-            subreddit: this.props.subreddit
+            subreddit: this.props.subreddit || this.props.match.params.subreddit
         });
     }
 
     render() {
         return <div {...styles.container}>
-            <Header title={`/r/${this.props.subreddit}`} />
+            <Header title={`/r/${this.props.subreddit || this.props.match.params.subreddit}`}/>
             {this.props.isFetching
                 ? <div {...styles.loading}>Loading</div>
                 : null}
@@ -40,7 +40,7 @@ function mapStateToProps(state, props) {
     const {
         isFetching,
         items: posts
-    } = postsBySubreddit[props.subreddit] || {
+    } = postsBySubreddit[props.subreddit || props.match.params.subreddit] || {
         isFetching: true,
         items: []
     }

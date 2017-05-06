@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Link } from 'react-router-dom';
 
 import * as styles from './PostSummaryStyles';
 import {formatToK, formatTimeAgo} from '../../utils';
@@ -29,7 +30,7 @@ export default class PostSummary extends Component {
 
         return <div {...styles.container}>
                 <div {...styles.titleRow}>
-                  <a {...styles.votes}>{formatToK(data.ups)}</a>
+                  <span {...styles.votes}>{formatToK(data.ups)}</span>
                   <div {...styles.title}>{data.title}</div>
                   {(gif_url || (data.post_hint === 'link' && data.thumbnail !== 'default')) && !fullImage ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
                 </div>
@@ -45,9 +46,9 @@ export default class PostSummary extends Component {
                 </div> : null }
                 <div {...styles.links}>
                     By <span {...styles.linkItem}>{`u/${data.author}`}</span>
-                    in {showSubreddit ? <a {...styles.linkItem} href={data.subreddit_name_prefixed}>{data.subreddit_name_prefixed}</a> : null }
+                    in {showSubreddit ? <Link {...styles.linkItem} to={data.subreddit_name_prefixed}>{data.subreddit_name_prefixed}</Link> : null }
                     posted <span {...styles.linkItem}>{formatTimeAgo(data.created_utc)}</span>
-                    having <a {...styles.linkItem} href={data.permalink}>{formatToK(data.num_comments)} <img src='/images/comments.png' {...styles.iconComments} /></a>
+                    having <Link {...styles.linkItem} to={data.permalink}>{formatToK(data.num_comments)} <img src='/images/comments.png' {...styles.iconComments} /></Link>
                 </div>
         </div>
     }

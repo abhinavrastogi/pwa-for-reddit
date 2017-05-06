@@ -14,5 +14,6 @@ export const title = css({
 export const user = css({
     textDecoration: 'none',
     color: '#ccc',
-    padding: '15px 5px 15px 15px'
+    padding: '15px 5px 15px 15px',
+    fontSize: 'smaller'
 })

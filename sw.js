@@ -1,7 +1,7 @@
 import toolbox from 'sw-toolbox';
 
 var version = 2;
-var cacheList = ['static', 'posts', 'comments', 'html'];
+var cacheList = ['static', 'posts', 'comments', 'html', 'manifest'];
 var currentCaches = {};
 cacheList.forEach(cache => {
 	currentCaches[cache] = cache + version;
@@ -57,6 +57,12 @@ toolbox.router.get('/r/*', toolbox.fastest, {
 toolbox.router.get('/', toolbox.fastest, {
     cache: {
         name: currentCaches['html'],
+        maxEntries: 1
+    }
+});
+toolbox.router.get('/manifest.json', toolbox.fastest, {
+    cache: {
+        name: currentCaches['manifest'],
         maxEntries: 1
     }
 });
