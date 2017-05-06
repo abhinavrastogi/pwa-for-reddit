@@ -22,7 +22,7 @@ class Subreddit extends Component {
 
     render() {
         return <div {...styles.container}>
-            <Header />
+            <Header title={`/r/${this.props.subreddit}`} />
             {this.props.isFetching
                 ? <div {...styles.loading}>Loading</div>
                 : null}
