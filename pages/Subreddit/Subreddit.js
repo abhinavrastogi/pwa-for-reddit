@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import * as actions from '../../actions';
-
+import { getCookieValue } from '../../utils';
 import PostSummary from '../../components/PostSummary/PostSummary';
 
 import * as styles from './SubredditStyles.js';
@@ -12,11 +12,15 @@ class Subreddit extends Component {
         window.iw = window.innerWidth;
     }
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch({
+        const { dispatch, subreddit } = this.props;
+        subreddit === 'frontpage' && getCookieValue('access_token')
+        ? dispatch({
+            type: actions.REQUEST_FRONT_PAGE
+        })
+        : dispatch({
             type: actions.REQUEST_POSTS,
-            subreddit: this.props.subreddit || this.props.match.params.subreddit
-        });
+            subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
+        })
     }
 
     render() {
@@ -34,17 +38,10 @@ class Subreddit extends Component {
 }
 
 function mapStateToProps(state, props) {
-    const { postsBySubreddit } = state
-    const {
-        isFetching,
-        items: posts
-    } = postsBySubreddit[props.subreddit || props.match.params.subreddit] || {
-        isFetching: true,
-        items: []
-    }
+    const { posts, isFetching } = state
 
     return {
-        posts,
+        posts: posts.items,
         isFetching
     }
 }
