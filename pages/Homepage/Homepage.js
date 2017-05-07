@@ -4,6 +4,6 @@ import Subreddit from '../Subreddit/Subreddit';
 
 export default class Homepage extends Component {
     render() {
-        return <Subreddit subreddit='popular' />
+        return <Subreddit subreddit='frontpage' />
     }
 }

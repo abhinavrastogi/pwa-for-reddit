@@ -2,16 +2,14 @@ import {
     REQUEST_POSTS, RECEIVE_POSTS
 } from '../actions'
 
-function posts(state = {
+export default function posts(state = {
     isFetching: false,
-    didInvalidate: false,
     items: []
 }, action) {
     switch (action.type) {
         case REQUEST_POSTS:
             return Object.assign({}, state, {
-                isFetching: true,
-                didInvalidate: false
+                isFetching: true
             })
         case RECEIVE_POSTS:
             // let min = 1000000, max = 0;
@@ -30,18 +28,17 @@ function posts(state = {
             //         medianScore: post.data.ups >= mid ? 1 : 0
             //     });
             // });
+            console.log('receive');
             return Object.assign({}, state, {
                 isFetching: false,
-                didInvalidate: false,
-                items: action.posts,
-                lastUpdated: action.receivedAt
+                items: action.posts
             })
         default:
             return state
     }
 }
 
-export default function postsBySubreddit(state = { }, action) {
+function postsBySubreddit(state = { }, action) {
     switch (action.type) {
         case RECEIVE_POSTS:
         case REQUEST_POSTS:

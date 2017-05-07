@@ -55,6 +55,13 @@ toolbox.router.get('/r/*', toolbox.fastest, {
     }
 });
 toolbox.router.get('/', toolbox.fastest, {
+    origin: 'https://oauth.reddit.com',
+    cache: {
+        name: currentCaches['posts'],
+        maxEntries: 10
+    }
+});
+toolbox.router.get('/', toolbox.fastest, {
     cache: {
         name: currentCaches['html'],
         maxEntries: 1

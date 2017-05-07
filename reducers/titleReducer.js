@@ -3,7 +3,7 @@ import {
 } from '../actions'
 
 export default function title(state = {
-    text: 'Reddit'
+    text: ''
 }, action) {
     switch (action.type) {
         case SET_TITLE:

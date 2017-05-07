@@ -1,12 +1,20 @@
-function getCookieValue(a) {
-    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-    return b ? b.pop() : '';
-}
+import { getCookieValue } from './utils';
 
 export function fetchPosts(subreddit) {
     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
         .then(response => response.json())
         .catch(err => {console.log(err)})
+}
+
+export function fetchFrontpage() {
+    console.log('api call');
+    return fetch(`https://oauth.reddit.com`, {
+        headers: {
+            'Authorization': `bearer ${getCookieValue('access_token')}`
+        }
+    })
+    .then(response => response.json())
+    .catch(err => {console.log(err)})
 }
 
 export function fetchComments(subreddit, post_id, post_title) {
