@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import * as actions from '../../actions';
 
-import Header from '../../components/Header/Header';
 import PostSummary from '../../components/PostSummary/PostSummary';
 
 import * as styles from './SubredditStyles.js';
@@ -22,8 +21,6 @@ class Subreddit extends Component {
 
     render() {
         return <div {...styles.container}>
-            {/*<Header title={`/r/${this.props.subreddit || this.props.match.params.subreddit}`}/>*/}
-            <div {...styles.title}>{`/r/${this.props.subreddit || this.props.match.params.subreddit}`}</div>
             {this.props.isFetching
                 ? <div {...styles.loading}>Loading</div>
                 : null}

@@ -4,12 +4,6 @@ export const page = css({
     color: '#ccc'
 });
 
-export const title = css({
-    position: 'absolute',
-    top: '12px',
-    fontSize: 'larger'
-})
-
 export const comment = css({
     padding: '10px 0',
     borderBottom: '1px dashed #333'

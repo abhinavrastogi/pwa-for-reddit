@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
-import Header from '../../components/Header/Header';
 import PostSummary from '../../components/PostSummary/PostSummary';
 import * as actions from '../../actions';
 
@@ -61,8 +60,6 @@ class Comments extends Component {
     render() {
         return !this.props.isFetching
             ? <div {...styles.page}>
-                {/*<Header title='Comments' />*/}
-                <div {...styles.title}>{`/r/${this.props.subreddit || this.props.match.params.subreddit} | Comments`}</div>
                 <PostSummary data={this.props.comments[0].data.children[0].data} />
                 {this.props.comments[1].data.children.map(comment => comment.kind === 't1' ? <Comment data={comment.data} /> : null)}
             </div>
