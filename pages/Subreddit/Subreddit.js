@@ -13,11 +13,7 @@ class Subreddit extends Component {
     }
     componentDidMount() {
         const { dispatch, subreddit } = this.props;
-        subreddit === 'frontpage' && getCookieValue('access_token')
-        ? dispatch({
-            type: actions.REQUEST_FRONT_PAGE
-        })
-        : dispatch({
+        dispatch({
             type: actions.REQUEST_POSTS,
             subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
         })

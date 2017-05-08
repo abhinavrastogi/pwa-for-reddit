@@ -28,7 +28,6 @@ export default function posts(state = {
             //         medianScore: post.data.ups >= mid ? 1 : 0
             //     });
             // });
-            console.log('receive');
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.posts

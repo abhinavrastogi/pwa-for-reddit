@@ -25,7 +25,8 @@ export const shade = css({
 });
 
 export const titleRow = css({
-    display: 'flex'
+    display: 'flex',
+    padding: '0 1px'
 });
 
 export const votes = css({
