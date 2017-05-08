@@ -52,9 +52,9 @@ class Comments extends Component {
         const { dispatch } = this.props;
         dispatch({
             type: actions.REQUEST_COMMENTS,
-            subreddit: this.props.subreddit,
-            post_id: this.props.post_id,
-            post_title: this.props.post_title
+            subreddit: this.props.subreddit || this.props.match.params.subreddit,
+            post_id: this.props.match.params.post_id,
+            post_title: this.props.match.params.post_title
         });
     }
     render() {
@@ -72,7 +72,7 @@ function mapStateToProps(state, props) {
     const {
         isFetching,
         items: comments
-    } = commentsBySubreddit[props.subreddit] || {
+    } = commentsBySubreddit[props.subreddit || props.match.params.subreddit] || {
         isFetching: true,
         items: []
     }

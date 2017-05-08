@@ -10,3 +10,8 @@ export const formatTimeAgo = timestamp => {
     else if(timeAgo < 60*60*24) return `${Math.round(timeAgo/(60*60))}h${postfix}`
     else if(timeAgo < 60*60*24*365) return `${Math.round(timeAgo/(60*60*24))}d${postfix}`
 }
+
+export function getCookieValue(a) {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}

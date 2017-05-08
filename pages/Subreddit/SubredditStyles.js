@@ -1,8 +1,7 @@
 import { css } from 'glamor';
 
 export const container = css({
-  color: '#ccc',
-  padding: '0 1px'
+  color: '#ccc'
 });
 
 export const postsList = css({

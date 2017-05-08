@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
-import postsBySubreddit from './postsReducer';
+import posts from './postsReducer';
 import commentsBySubreddit from './commentsReducer';
+import userInfo from './userReducer';
+import title from './titleReducer';
 
 const rootReducer = combineReducers({
-  postsBySubreddit,
-  commentsBySubreddit
+  posts,
+  commentsBySubreddit,
+  userInfo,
+  title
 })
 
 export default rootReducer

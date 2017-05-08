@@ -25,7 +25,8 @@ export const shade = css({
 });
 
 export const titleRow = css({
-    display: 'flex'
+    display: 'flex',
+    padding: '0 1px'
 });
 
 export const votes = css({
@@ -43,7 +44,8 @@ export const title = css({
 
 export const gif_thumb = css({
     width: '75px',
-    height: '75px'
+    height: '75px',
+    marginLeft: '5px'
 });
 
 export const links = css({
