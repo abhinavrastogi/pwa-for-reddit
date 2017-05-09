@@ -68,7 +68,7 @@ export const gif_thumb = css({
 export const postFooter = css({
     marginTop: '5px',
     fontSize: 'smaller',
-    color: '#999'
+    color: '#777'
 });
 
 export const votes = css({
