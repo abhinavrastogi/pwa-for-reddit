@@ -32,7 +32,6 @@ app.get('*', (req, res) => {
     const ignoreAuthOnPaths = ['.map', '.ico'];
 
     if(ignoreAuthOnPaths.indexOf(req.path.substr(-4)) < 0 && req.cookies.refresh_token && !req.cookies.access_token) {
-        console.log('revalidating', req.cookies);
         fetch('https://www.reddit.com/api/v1/access_token', {
             method: 'POST',
             headers: {
@@ -43,14 +42,13 @@ app.get('*', (req, res) => {
         .then(response => response.json())
         .then(json => {
             if(json.error) return Promise.reject(json.error);
-            console.log(json);
-            if(json.access_token && json.refresh_token) {
+            if(json.access_token) {
                 res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
             } else {
                 return Promise.reject('No token received');
             }
         })
-        .catch(err => { res.status(401).send('Auth failure!' + err); })
+        .catch(err => { res.status(401).send('Auth failure!'); })
     } else {
         res.type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
     }
