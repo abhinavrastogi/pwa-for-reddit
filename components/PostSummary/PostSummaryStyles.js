@@ -16,6 +16,15 @@ export const image = css({
     width: '100%'
 });
 
+export const blue = css({
+    color: '#24a0ed',
+
+})
+
+export const green = css({
+    color: 'rgb(70, 209, 96)'
+})
+
 export const shade = css({
     height: '40px',
     position: 'absolute',
@@ -27,13 +36,6 @@ export const shade = css({
 export const titleRow = css({
     display: 'flex',
     padding: '0 1px'
-});
-
-export const votes = css({
-    margin: 'auto',
-    fontWeight: 'bold',
-    paddingRight: '10px',
-    color: '#666'
 });
 
 export const title = css({
@@ -55,9 +57,15 @@ export const links = css({
     lineHeight: '1.5'
 });
 
+export const votes = css({
+    margin: 'auto',
+    fontWeight: 'bold',
+    paddingRight: '10px',
+    color: '#666'
+});
+
 export const linkItem = css({
     paddingRight: '3px',
-    color: '#999',
     textDecoration: 'none'
 });
 
