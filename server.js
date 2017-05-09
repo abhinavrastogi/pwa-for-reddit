@@ -43,7 +43,7 @@ app.get('*', (req, res) => {
         .then(json => {
             if(json.error) return Promise.reject(json.error);
             if(json.access_token) {
-                res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
+                res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in * 1000}).type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
             } else {
                 return Promise.reject('No token received');
             }
