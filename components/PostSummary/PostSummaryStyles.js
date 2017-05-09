@@ -1,7 +1,7 @@
 import { css } from 'glamor';
 
 export const container = css({
-    padding: '10px 1px',
+    padding: '10px 0',
     borderBottom:'1px dashed #333'
 });
 
@@ -16,6 +16,14 @@ export const image = css({
     width: '100%'
 });
 
+export const blue = css({
+    color: '#24a0ed'
+})
+
+export const green = css({
+    color: 'rgb(70, 209, 96)'
+})
+
 export const shade = css({
     height: '40px',
     position: 'absolute',
@@ -25,43 +33,43 @@ export const shade = css({
 });
 
 export const titleRow = css({
-    display: 'flex',
-    padding: '0 1px'
+    display: 'flex'
 });
 
-export const votes = css({
-    margin: 'auto',
-    fontWeight: 'bold',
-    paddingRight: '10px',
-    color: '#666'
-});
+export const postMeta = css({
+    fontSize: 'smaller',
+    marginBottom: '5px',
+    color: '#999'
+})
+
+export const metaItem = css({
+    textDecoration: 'none',
+    padding: '5px 5px 5px 2px'
+})
 
 export const title = css({
     flex: 1,
     lineHeight: '1.3',
-    margin: 'auto'
+    padding: '0 2px'
 });
+
+export const titleText = css({
+  textDecoration: 'none',
+  color: '#ccc',
+  display: 'block'
+})
 
 export const gif_thumb = css({
-    width: '75px',
-    height: '75px',
-    marginLeft: '5px'
+    width: '65px',
+    height: '65px',
+    marginRight: '6px'
 });
 
-export const links = css({
+export const postFooter = css({
     marginTop: '5px',
     fontSize: 'smaller',
-    color: '#666',
-    lineHeight: '1.5'
+    color: '#999'
 });
 
-export const linkItem = css({
-    paddingRight: '3px',
-    color: '#999',
-    textDecoration: 'none'
-});
-
-export const iconComments = css({
-    width: '13px',
-    verticalAlign: 'middle'
-});
+export const votes = css({
+})
