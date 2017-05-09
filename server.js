@@ -18,7 +18,7 @@ app.get('/auth', (req, res) => {
         headers: {
             'Authorization': `Basic ${base64encodedData}`
         },
-        body: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http%3A%2F%2Fpwa-for-reddit.herokuapp.com%2Fauth`
+        body: `grant_type=authorization_code&code=${req.query.code}&redirect_uri=https%3A%2F%2Fpwa-for-reddit.herokuapp.com%2Fauth`
     })
     .then(response => response.json())
     .then(json => {
@@ -39,7 +39,7 @@ app.get('*', (req, res) => {
             headers: {
                 'Authorization': `Basic ${base64encodedData}`
             },
-            body: `grant_type=refresh_token&refresh_token=${req.cookies.refresh_token}&redirect_uri=http%3A%2F%2Fpwa-for-reddit.herokuapp.com%2Fauth`
+            body: `grant_type=refresh_token&refresh_token=${req.cookies.refresh_token}&redirect_uri=https%3A%2F%2Fpwa-for-reddit.herokuapp.com%2Fauth`
         })
         .then(response => response.json())
         .then(json => {
