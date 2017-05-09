@@ -2,7 +2,8 @@ import { css } from 'glamor';
 
 export const headerContainer = css({
     display: 'flex',
-    borderBottom: '1px solid #333'
+    borderBottom: '1px solid #333',
+    padding: '0 1px'
 })
 
 export const title = css({

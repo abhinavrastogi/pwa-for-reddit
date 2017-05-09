@@ -1,5 +1,5 @@
 import {
-    REQUEST_POSTS, RECEIVE_POSTS
+    REQUEST_POSTS, RECEIVE_POSTS, FAILED_REQUEST_POSTS
 } from '../actions'
 
 export default function posts(state = {
@@ -31,6 +31,10 @@ export default function posts(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.posts
+            })
+        case FAILED_REQUEST_POSTS:
+            return Object.assign({}, state, {
+                isFetching: true
             })
         default:
             return state

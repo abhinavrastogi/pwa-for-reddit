@@ -14,15 +14,16 @@ export function fetchPosts(subreddit, auth = true) {
 export function fetchComments(subreddit, post_id, post_title) {
     return fetch(`https://www.reddit.com/r/${subreddit}/comments/${post_id}/${post_title}.json`)
         .then(response => response.json())
-        .catch(err => {console.log(err)})
 }
 
 export function fetchUserInfo() {
-    return fetch('https://oauth.reddit.com/api/v1/me', {
-        headers: {
-            'Authorization': `bearer ${getCookieValue('access_token')}`
-        }
-    })
-    .then(response => response.json())
-    .catch(err => {console.log(err)})
+    const access_token = getCookieValue('access_token');
+    return access_token
+        ? fetch('https://oauth.reddit.com/api/v1/me', {
+            headers: {
+                'Authorization': `bearer ${access_token}`
+            }
+        })
+            .then(response => response.json())
+        : Promise.reject('No auth token');
 }

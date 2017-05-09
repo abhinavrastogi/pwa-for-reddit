@@ -23,14 +23,15 @@ app.get('/auth', (req, res) => {
     .then(response => response.json())
     .then(json => {
         if(json.error) return Promise.reject(json.error);
-        if(json.access_token && json.refresh_token) res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).cookie('refresh_token', json.refresh_token, {secure: true}).redirect(`/`);
+        if(json.access_token && json.refresh_token) res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).cookie('refresh_token', json.refresh_token, {secure: true, maxAge: 604800}).redirect(`/`);
     })
     .catch(err => { res.status(401).send('Auth failure!'); })
 });
 
 app.get('*', (req, res) => {
-    console.log(req.cookies);
-    if(req.cookies.refresh_token && !request.cookies.access_token) {
+    const ignoreAuthOnPaths = ['.map', '.ico'];
+
+    if(ignoreAuthOnPaths.indexOf(req.path.substr(-4)) < 0 && req.cookies.refresh_token && !request.cookies.access_token) {
         console.log('revalidating');
         fetch('https://www.reddit.com/api/v1/access_token', {
             method: 'POST',
@@ -42,11 +43,14 @@ app.get('*', (req, res) => {
         .then(response => response.json())
         .then(json => {
             if(json.error) return Promise.reject(json.error);
-            if(json.access_token && json.refresh_token) res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).redirect(`/`);
+            if(json.access_token && json.refresh_token) {
+                res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
+            }
         })
         .catch(err => { res.status(401).send('Auth failure!'); })
+    } else {
+        res.type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
     }
-  res.type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(process.env.PORT || port);

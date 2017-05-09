@@ -1,6 +1,6 @@
 import toolbox from 'sw-toolbox';
 
-var version = 2;
+var version = 3;
 var cacheList = ['static', 'posts', 'comments', 'html', 'manifest'];
 var currentCaches = {};
 cacheList.forEach(cache => {
@@ -8,14 +8,14 @@ cacheList.forEach(cache => {
 });
 
 self.addEventListener('install', event => {
-	event.waitUntil(
-		caches.open(`posts${version}`).then(cache => {
-			cache.addAll([
-				'/r/popular.json'
-			]);
-			return self.skipWaiting();
-		})
-	);
+	event.waitUntil(self.skipWaiting());
+	// 	caches.open(`posts${version}`).then(cache => {
+	// 		cache.addAll([
+	// 			new Request('https://www.reddit.com/r/popular.json')
+	// 		]);
+	// 		return self.skipWaiting();
+	// 	})
+	// );
 });
 
 self.addEventListener('activate', event => {
@@ -34,10 +34,18 @@ self.addEventListener('activate', event => {
 	);
 });
 
-toolbox.router.get('/*\.js', toolbox.fastest, {
+toolbox.router.get('/sw.js', toolbox.networkOnly);
+
+toolbox.router.get('/*\.js', toolbox.networkFirst, {
     cache: {
         name: currentCaches['static'],
-        maxEntries: 2
+        maxEntries: 5
+    }
+});
+toolbox.router.get('/images/*', toolbox.fastest, {
+    cache: {
+        name: currentCaches['static'],
+        maxEntries: 5
     }
 });
 toolbox.router.get('/r/:subreddit/comments/:post_id/*', toolbox.fastest, {
@@ -61,7 +69,7 @@ toolbox.router.get('/', toolbox.fastest, {
         maxEntries: 10
     }
 });
-toolbox.router.get('/', toolbox.fastest, {
+toolbox.router.get('/', toolbox.networkFirst, {
     cache: {
         name: currentCaches['html'],
         maxEntries: 1
