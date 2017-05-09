@@ -29,14 +29,20 @@ export default class PostSummary extends Component {
         }
 
         return <div {...styles.container}>
-                <div {...styles.links}>
-                    {showSubreddit ? <Link {...styles.linkItem} {...styles.blue} to={data.subreddit_name_prefixed}>{data.subreddit_name_prefixed}</Link> : null }
-                    &bull;&nbsp;<span {...styles.linkItem}>{formatTimeAgo(data.created_utc)}</span>
-                    &bull;&nbsp;<span {...styles.linkItem}>{`u/${data.author}`}</span>
-                </div>
                 <div {...styles.titleRow}>
-                  <div {...styles.title}>{data.title}</div>
-                  {(gif_url || (data.post_hint === 'link' && data.thumbnail !== 'default')) && !fullImage ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
+                  {(gif_url || (data.post_hint === 'link' && data.thumbnail !== 'default')) ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
+                  <div {...styles.title}>
+                    <div {...styles.postMeta}>
+                        {showSubreddit ? <Link {...styles.metaItem} {...styles.blue} to={`/r/${data.subreddit}`}>{data.subreddit_name_prefixed}</Link> : null }
+                        &bull;&nbsp;<span {...styles.metaItem}>{formatTimeAgo(data.created_utc)}</span>
+                        &bull;&nbsp;<span {...styles.metaItem}>{`u/${data.author}`}</span>
+                    </div>
+                    <Link to={data.permalink} {...styles.titleText}>{data.title}</Link>
+                    <div {...styles.postFooter}>
+                      <span {...styles.comments}>{formatToK(data.num_comments)} Comments</span>
+                      &nbsp;&bull;&nbsp;<span {...styles.votes}>{formatToK(data.ups)} votes</span>
+                    </div>
+                  </div>
                 </div>
                 {img_url && data.post_hint === 'image' && !gif_url ? <div {...styles.imageContainer(fullImage || img_height < 600)} onClick={this.toggleImage}>
                   <img src={img_url} {...styles.image} />
@@ -48,10 +54,6 @@ export default class PostSummary extends Component {
                 {fullImage && !gif_url && data.post_hint === 'link' ? <div {...styles.imageContainer(fullImage)} onClick={this.toggleImage}>
                     <img src={img_url} {...styles.image} />
                 </div> : null }
-                <div {...styles.links}>
-                    <Link {...styles.linkItem} to={data.permalink}>{formatToK(data.num_comments)} <img src='/images/comments.png' {...styles.iconComments} /></Link>
-                    <span {...styles.votes}>{formatToK(data.ups)}</span>
-                </div>
         </div>
     }
 }
