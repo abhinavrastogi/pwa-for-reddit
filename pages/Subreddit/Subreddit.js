@@ -19,14 +19,14 @@ class Subreddit extends Component {
         })
     }
 
-    render() {
+    render({posts, isFetching, subreddit}) {
         return <div {...styles.container}>
-            {this.props.isFetching
+            {isFetching
                 ? <div {...styles.loading}>Loading</div>
                 : null}
-            {!this.props.isFetching && this.props.posts && this.props.posts.data
+            {!isFetching && posts && posts.data
                 ? <div>
-                    {this.props.posts.data.children.map(post => <PostSummary data={post.data} showSubreddit={post.data.subreddit!=this.props.subreddit} />)}
+                    {posts.data.children.map(post => <PostSummary data={post.data} showSubreddit={post.data.subreddit!=subreddit} />)}
                 </div>
                 : null}
         </div>
@@ -34,11 +34,10 @@ class Subreddit extends Component {
 }
 
 function mapStateToProps(state, props) {
-    const { posts, isFetching } = state
-
+    const { posts } = state;
     return {
         posts: posts.items,
-        isFetching
+        isFetching: posts.isFetching
     }
 }
 

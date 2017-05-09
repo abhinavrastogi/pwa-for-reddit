@@ -34,21 +34,10 @@ export default function posts(state = {
             })
         case FAILED_REQUEST_POSTS:
             return Object.assign({}, state, {
-                isFetching: true
+                isFetching: false,
+                error: true
             })
         default:
             return state
-    }
-}
-
-function postsBySubreddit(state = { }, action) {
-    switch (action.type) {
-        case RECEIVE_POSTS:
-        case REQUEST_POSTS:
-        return Object.assign({}, state, {
-            [action.subreddit]: posts(state[action.subreddit], action)
-        })
-        default:
-        return state
     }
 }
