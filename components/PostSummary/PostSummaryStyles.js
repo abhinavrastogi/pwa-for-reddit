@@ -60,8 +60,8 @@ export const titleText = css({
 })
 
 export const gif_thumb = css({
-    width: '65px',
-    height: '65px',
+    width: '70px',
+    height: '70px',
     marginRight: '6px'
 });
 

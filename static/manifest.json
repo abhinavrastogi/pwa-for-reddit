@@ -6,7 +6,7 @@
   "background_color": "black",
   "description": "A simple PWA reader for Readdit",
   "icons": [{
-    "src": "static/images/redditlite.png",
+    "src": "/images/redditlite.png",
     "sizes": "300x300",
     "type": "image/png"
   }],
