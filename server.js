@@ -43,6 +43,7 @@ app.get('*', (req, res) => {
         .then(response => response.json())
         .then(json => {
             if(json.error) return Promise.reject(json.error);
+            console.log(json);
             if(json.access_token && json.refresh_token) {
                 res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
             } else {
