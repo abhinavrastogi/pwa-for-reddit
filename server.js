@@ -31,7 +31,7 @@ app.get('/auth', (req, res) => {
 app.get('*', (req, res) => {
     const ignoreAuthOnPaths = ['.map', '.ico'];
 
-    if(ignoreAuthOnPaths.indexOf(req.path.substr(-4)) < 0 && req.cookies.refresh_token && !request.cookies.access_token) {
+    if(ignoreAuthOnPaths.indexOf(req.path.substr(-4)) < 0 && req.cookies.refresh_token && !req.cookies.access_token) {
         console.log('revalidating');
         fetch('https://www.reddit.com/api/v1/access_token', {
             method: 'POST',
