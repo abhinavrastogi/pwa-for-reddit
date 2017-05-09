@@ -23,8 +23,7 @@ app.get('/auth', (req, res) => {
     .then(response => response.json())
     .then(json => {
         if(json.error) return Promise.reject(json.error);
-        console.log(json);
-        if(json.access_token && json.refresh_token) res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).cookie('refresh_token', json.refresh_token, {secure: true, maxAge: 604800}).redirect(`/`);
+        if(json.access_token && json.refresh_token) res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in * 1000}).cookie('refresh_token', json.refresh_token, {secure: true, maxAge: 604800 * 1000}).redirect(`/`);
     })
     .catch(err => { res.status(401).send('Auth failure!'); })
 });
@@ -50,7 +49,7 @@ app.get('*', (req, res) => {
                 return Promise.reject('No token received');
             }
         })
-        .catch(err => { res.status(401).send('Auth failure!'); })
+        .catch(err => { res.status(401).send('Auth failure!' + err); })
     } else {
         res.type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
     }
