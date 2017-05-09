@@ -23,6 +23,7 @@ app.get('/auth', (req, res) => {
     .then(response => response.json())
     .then(json => {
         if(json.error) return Promise.reject(json.error);
+        console.log(json);
         if(json.access_token && json.refresh_token) res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).cookie('refresh_token', json.refresh_token, {secure: true, maxAge: 604800}).redirect(`/`);
     })
     .catch(err => { res.status(401).send('Auth failure!'); })
