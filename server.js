@@ -45,6 +45,8 @@ app.get('*', (req, res) => {
             if(json.error) return Promise.reject(json.error);
             if(json.access_token && json.refresh_token) {
                 res.cookie('access_token', json.access_token, {secure: true, maxAge: json.expires_in}).type('html').set({'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'}).sendFile(path.join(__dirname, 'index.html'));
+            } else {
+                return Promise.reject('No token received');
             }
         })
         .catch(err => { res.status(401).send('Auth failure!'); })
