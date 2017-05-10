@@ -42,7 +42,7 @@ toolbox.router.get('/*\.js', toolbox.networkFirst, {
         maxEntries: 5
     }
 });
-toolbox.router.get('/images/*', toolbox.fastest, {
+toolbox.router.get('/images/*', toolbox.cacheFirst, {
     cache: {
         name: currentCaches['static'],
         maxEntries: 5
@@ -75,7 +75,7 @@ toolbox.router.get('/', toolbox.networkFirst, {
         maxEntries: 1
     }
 });
-toolbox.router.get('/manifest.json', toolbox.fastest, {
+toolbox.router.get('/manifest.json', toolbox.networkFirst, {
     cache: {
         name: currentCaches['manifest'],
         maxEntries: 1
