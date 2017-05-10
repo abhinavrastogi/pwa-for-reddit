@@ -36,10 +36,14 @@ export const titleRow = css({
     display: 'flex'
 });
 
+export const sticky = stickied => css({
+    borderLeft: stickied ? '2px solid rgb(70, 209, 96)' : null,
+    paddingLeft: stickied ? '5px' : null
+})
+
 export const postMeta = css({
     fontSize: 'smaller',
-    marginBottom: '5px',
-    color: '#999'
+    color: '#777'
 })
 
 export const metaItem = css({
@@ -56,7 +60,8 @@ export const title = css({
 export const titleText = css({
   textDecoration: 'none',
   color: '#ccc',
-  display: 'block'
+  display: 'block',
+  marginTop: '5px'
 })
 
 export const gif_thumb = css({
@@ -66,10 +71,14 @@ export const gif_thumb = css({
 });
 
 export const postFooter = css({
-    marginTop: '5px',
-    fontSize: 'smaller',
-    color: '#777'
+    marginTop: '10px'
 });
 
-export const votes = css({
+export const footerComments = css({
+    color: '#777'
+})
+
+export const selftext = css({
+    paddingTop: '10px',
+    textAlign: 'justify'
 })

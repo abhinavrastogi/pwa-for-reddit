@@ -16,7 +16,6 @@ class Comment extends Component {
         }
     }
     toggleReplies() {
-        console.log('toggling', this.state);
         this.setState({
             showReplies: !this.state.showReplies
         });
@@ -60,7 +59,7 @@ class Comments extends Component {
     render() {
         return !this.props.isFetching
             ? <div {...styles.page}>
-                <PostSummary data={this.props.comments[0].data.children[0].data} />
+                <PostSummary data={this.props.comments[0].data.children[0].data} config={{showFullImages: true, showSelfText: true}} />
                 {this.props.comments[1].data.children.map(comment => comment.kind === 't1' ? <Comment data={comment.data} /> : null)}
             </div>
             : 'Loading'

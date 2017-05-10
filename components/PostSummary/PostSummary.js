@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Link } from 'react-router-dom';
+import Markup from 'preact-markup';
 
 import * as styles from './PostSummaryStyles';
 import {formatToK, formatTimeAgo} from '../../utils';
@@ -28,21 +29,25 @@ export default class PostSummary extends Component {
                 gif_url = data.preview.images[0].variants.gif.source.url;
             }
         }
+        const renderFooter = <div {...styles.postFooter} {...styles.postMeta}>
+          <Link to={data.permalink} {...styles.metaItem} {...styles.footerComments}>{formatToK(data.num_comments)} Comments</Link>
+          <span {...styles.metaItem}>&bull;</span>
+          <span {...styles.votes} {...styles.metaItem}>{formatToK(data.ups)} votes</span>
+        </div>;
 
-        return <div {...styles.container}>
+        return <div {...styles.container} {...styles.sticky(data.stickied)}>
                 <div {...styles.titleRow}>
-                  {(gif_url || ignoreThumbs.indexOf(data.thumbnail)<0) ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
+                  {!config.showFullImages && (gif_url || ignoreThumbs.indexOf(data.thumbnail)<0) ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
                   <div {...styles.title}>
                     <div {...styles.postMeta}>
                         {showSubreddit ? <Link {...styles.metaItem} {...styles.blue} to={`/r/${data.subreddit}`}>{data.subreddit_name_prefixed}</Link> : null }
-                        &bull;&nbsp;<span {...styles.metaItem}>{formatTimeAgo(data.created_utc)}</span>
-                        &bull;&nbsp;<span {...styles.metaItem}>{`u/${data.author}`}</span>
+                        {showSubreddit ? <span {...styles.metaItem}>&bull;</span> : null}
+                        {!data.stickied ? <span {...styles.metaItem}>{formatTimeAgo(data.created_utc)}</span> : null}
+                        {!data.stickied ? <span {...styles.metaItem}>&bull;</span> : null}
+                        <span {...styles.metaItem}>{`u/${data.author}`}</span>
                     </div>
                     <Link to={data.permalink} {...styles.titleText}>{data.title}</Link>
-                    <div {...styles.postFooter}>
-                      <span>{formatToK(data.num_comments)} Comments</span>
-                      &nbsp;&bull;&nbsp;<span {...styles.votes}>{formatToK(data.ups)} votes</span>
-                    </div>
+                    {!config.showFullImages && !config.showSelfText ? renderFooter : null}
                   </div>
                 </div>
                 {(config.showFullImages || fullImage) && img_url && data.post_hint === 'image' && !gif_url ? <div {...styles.imageContainer(true)} onClick={this.toggleImage}>
@@ -54,6 +59,8 @@ export default class PostSummary extends Component {
                 {(config.showFullImages || fullImage) && !gif_url && data.post_hint === 'link' ? <div {...styles.imageContainer(true)} onClick={this.toggleImage}>
                     <img src={img_url} {...styles.image} />
                 </div> : null }
+                {config.showSelfText && data.selftext ? <div {...styles.selftext}><Markup markup={data.selftext_html} type="html" /></div> : null}
+                {config.showSelfText || config.showFullImages ? renderFooter : null}
         </div>
     }
 }
