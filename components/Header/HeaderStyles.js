@@ -8,8 +8,17 @@ export const headerContainer = css({
 
 export const title = css({
     flex: 1,
-    fontSize: 'larger',
     padding: '14px 0'
+})
+
+export const titleText = css({
+    fontSize: 'larger'
+})
+
+export const subs = css({
+    fontSize: '12.5px',
+    color: '#777',
+    paddingLeft: '6px'
 })
 
 export const user = css({
@@ -17,6 +26,11 @@ export const user = css({
     color: '#ccc',
     padding: '18px 5px 15px 15px',
     fontSize: 'smaller'
+})
+
+export const userLoggedIn = css({
+    fontSize: 'smaller',
+    color: '#777'
 })
 
 export const sswitch = css({

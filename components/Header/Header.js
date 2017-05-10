@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 
 import * as styles from './HeaderStyles.js';
 import * as actions from '../../actions';
+import {formatToK} from '../../utils';
 
 class Header extends Component {
     constructor() {
@@ -24,9 +25,13 @@ class Header extends Component {
         let sr = inp.value.trim();
         sr && (window.location = `/r/${sr}`);
     }
-    render({ userInfo, title }) {
+    render({ userInfo, title, aboutSubreddit }) {
         return <div {...styles.headerContainer}>
-            <div {...styles.title}>{title.text}</div>
+            <div {...styles.title}>
+                <div {...styles.titleText}>{title.text}{aboutSubreddit.subscribers ? <span {...styles.subs}>{formatToK(aboutSubreddit.subscribers)} subs</span> : null}</div>
+                {userInfo.isFetching ? <span {...styles.userLoggedIn}>...</span> : null}
+                {!userInfo.isFetching && userInfo.name ? <span {...styles.userLoggedIn}>{`${userInfo.name}`}</span> : null}
+            </div>
             <form onSubmit={this.openSubreddit}>
                 <input type='text' {...styles.inputSubreddit} placeholder='open subreddit' />
             </form>
@@ -34,17 +39,15 @@ class Header extends Component {
               <input type="checkbox" onClick={this.toggleImages} />
               <div {...styles.slider}></div>
             </label>
-            {userInfo.isFetching ? <span {...styles.user}>...</span> : null}
-            {!userInfo.isFetching && userInfo.name ? <span {...styles.user}>{userInfo.name}</span> : null}
             {!userInfo.isFetching && !userInfo.name ? <a {...styles.user} href='https://www.reddit.com/api/v1/authorize.compact?client_id=u9-0jmBsXJw4tQ&response_type=code&state=RANDOM_STRING&redirect_uri=https%3A%2F%2Fpwa-for-reddit.herokuapp.com%2Fauth&duration=permanent&scope=read,vote,identity,mysubreddits'>Login</a> : null}
         </div>
     }
 }
 
 function mapStateToProps(state, props) {
-    const { userInfo, title } = state
+    const { userInfo, title, aboutSubreddit } = state
 
-    return { userInfo, title }
+    return { userInfo, title, aboutSubreddit: aboutSubreddit.data }
 }
 
 export default connect(mapStateToProps)(Header);

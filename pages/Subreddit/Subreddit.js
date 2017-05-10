@@ -17,6 +17,10 @@ class Subreddit extends Component {
         dispatch({
             type: actions.REQUEST_POSTS,
             subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
+        });
+        subreddit != 'frontpage' && dispatch({
+            type: actions.REQUEST_ABOUT_SUBREDDIT,
+            subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
         })
     }
 

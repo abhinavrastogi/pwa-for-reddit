@@ -1,4 +1,8 @@
-export const formatToK = num => num < 1000 ? num : (Math.floor(num/100)*100)/1000 + 'k';
+export const formatToK = num => {
+    if (num < 1000) return num;
+    else if(num < 1000000)  return Math.floor(num/1000) + 'k'
+    else return Math.floor(num/1000000) + 'm'
+}
 
 export const formatTimeAgo = timestamp => {
     const currentTime = Math.floor(Date.now()/1000);
