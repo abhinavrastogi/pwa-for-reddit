@@ -2,10 +2,11 @@ import { getCookieValue } from './utils';
 
 export function fetchPosts(subreddit, auth = true) {
     const access_token = auth && getCookieValue('access_token');
-    const prefix = access_token ? 'oauth' : 'www';
-    const postfix = access_token ? '' : '.json';
-    const headers = access_token ? { 'Authorization': `bearer ${access_token}` } : {};
-    const subredditUrl = access_token && subreddit === 'frontpage' ? '' : `/r/${subreddit.toLowerCase()}`;
+
+    const prefix = subreddit === 'frontpage' && access_token ? 'oauth' : 'www';
+    const postfix = subreddit === 'frontpage' && access_token ? '' : '.json';
+    const headers = subreddit === 'frontpage' && access_token ? { 'Authorization': `bearer ${access_token}` } : {};
+    const subredditUrl = subreddit === 'frontpage' && access_token ? '' : `/r/${subreddit.toLowerCase()}`;
     // console.log({auth, subreddit, access_token, prefix, postfix, headers, subredditUrl});
     return fetch(`https://${prefix}.reddit.com${subredditUrl}${postfix}?raw_json=1`, { headers })
         .then(response => response.ok ? response.json() : Promise.reject(response.json()))
