@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 import * as actions from '../../actions';
 import { getCookieValue } from '../../utils';
 import PostSummary from '../../components/PostSummary/PostSummary';
+import Loader from '../../components/Loader/Loader';
 
 import * as styles from './SubredditStyles.js';
 
@@ -22,7 +23,7 @@ class Subreddit extends Component {
     render({posts, isFetching, subreddit, config}) {
         return <div {...styles.container}>
             {isFetching
-                ? <div {...styles.loading}>Loading</div>
+                ? <Loader />
                 : null}
             {!isFetching && posts && posts.data
                 ? <div>

@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 
 import PostSummary from '../../components/PostSummary/PostSummary';
 import * as actions from '../../actions';
+import Loader from '../../components/Loader/Loader';
 
 import * as styles from './CommentsStyles.js';
 import * as postStyles from '../../components/PostSummary/PostSummaryStyles.js';
@@ -62,7 +63,7 @@ class Comments extends Component {
                 <PostSummary data={this.props.comments[0].data.children[0].data} config={{showFullImages: true, showSelfText: true}} />
                 {this.props.comments[1].data.children.map(comment => comment.kind === 't1' ? <Comment data={comment.data} /> : null)}
             </div>
-            : 'Loading'
+            : <Loader />
     }
 }
 

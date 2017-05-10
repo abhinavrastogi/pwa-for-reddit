@@ -7,8 +7,3 @@ export const container = css({
 export const postsList = css({
 
 });
-
-export const loading = css({
-    textAlign: 'center',
-    padding: '100px'
-});
