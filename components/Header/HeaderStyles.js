@@ -3,7 +3,7 @@ import { css } from 'glamor';
 export const headerContainer = css({
     display: 'flex',
     borderBottom: '1px solid #333',
-    padding: '0 1px'
+    padding: '11px 1px 0 1px'
 })
 
 export const title = css({
@@ -15,7 +15,7 @@ export const title = css({
 export const user = css({
     textDecoration: 'none',
     color: '#ccc',
-    padding: '15px 5px 15px 15px',
+    padding: '18px 5px 15px 15px',
     fontSize: 'smaller'
 })
 
@@ -24,7 +24,7 @@ export const sswitch = css({
   display: 'inline-block',
   width: '40px',
   height: '24px',
-  margin: '10px',
+  margin: '12px',
   ' input': {
       display: 'none',
       ':checked': {
@@ -60,4 +60,16 @@ export const slider = css({
       transition: '.4s',
       borderRadius: '50%'
   }
+})
+
+export const inputSubreddit = css({
+    outline: 'none',
+    border: '1px solid #666',
+    borderRadius: '24px',
+    padding: '3px 10px',
+    color: '#fff',
+    backgroundColor: '#000',
+    width: '86px',
+    margin: '13px',
+    textTransform: 'lowercase'
 })

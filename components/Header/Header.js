@@ -18,9 +18,18 @@ class Header extends Component {
     toggleImages() {
         this.props.dispatch({type: actions.TOGGLE_IMAGES});
     }
+    openSubreddit(e) {
+        e.preventDefault();
+        let inp = document.querySelector('input', e);
+        let sr = inp.value.trim();
+        sr && (window.location = `/r/${sr}`);
+    }
     render({ userInfo, title }) {
         return <div {...styles.headerContainer}>
             <div {...styles.title}>{title.text}</div>
+            <form onSubmit={this.openSubreddit}>
+                <input type='text' {...styles.inputSubreddit} placeholder='open subreddit' />
+            </form>
             <label {...styles.sswitch}>
               <input type="checkbox" onClick={this.toggleImages} />
               <div {...styles.slider}></div>
