@@ -47,6 +47,7 @@ export default class PostSummary extends Component {
                         <span {...styles.metaItem}>{`u/${data.author}`}</span>
                     </div>
                     <Link to={data.permalink} {...styles.titleText}>{data.title}</Link>
+                    {!config.showSelfText && data.selftext && !data.stickied ? <Link {...styles.miniselftext} to={data.permalink}>{data.selftext}</Link> : null}
                     {!config.showFullImages && !config.showSelfText ? renderFooter : null}
                   </div>
                 </div>

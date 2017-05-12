@@ -32,6 +32,17 @@ export const shade = css({
     width: '100%'
 });
 
+export const miniselftext = css({
+  maxHeight: '31px',
+  padding: '10px 1px 0 1px',
+  color: '#999',
+  fontSize: 'smaller',
+  overflow: 'hidden',
+  display: 'block',
+  textDecoration: 'none',
+  wordBreak: 'break-word'
+})
+
 export const titleRow = css({
     display: 'flex'
 });
@@ -61,7 +72,7 @@ export const titleText = css({
   textDecoration: 'none',
   color: '#ccc',
   display: 'block',
-  marginTop: '5px'
+  marginTop: '8px'
 })
 
 export const gif_thumb = css({
