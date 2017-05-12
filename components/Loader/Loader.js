@@ -3,7 +3,7 @@ import { css } from 'glamor';
 
 const loading = css({
     textAlign: 'center',
-    padding: '100px'
+    padding: '20px'
 })
 
 export default class Loader extends Component {

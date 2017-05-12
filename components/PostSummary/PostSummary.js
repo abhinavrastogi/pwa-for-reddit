@@ -20,7 +20,7 @@ export default class PostSummary extends Component {
     }
     render({data, showSubreddit, config}, {fullImage}) {
         let img_url = '', img_height, gif_url = '';
-        const ignoreThumbs = ['default', 'self', 'nsfw', '', 'spoiler'];
+        const ignoreThumbs = ['default', 'self', 'nsfw', '', 'spoiler', 'image'];
         if(data.preview) {
             let aspect_ratio = data.preview.images[0].source.height / data.preview.images[0].source.width;
             img_height = aspect_ratio * window.iw;
@@ -37,7 +37,7 @@ export default class PostSummary extends Component {
 
         return <div {...styles.container} {...styles.sticky(data.stickied)}>
                 <div {...styles.titleRow}>
-                  {!config.showFullImages && (gif_url || ignoreThumbs.indexOf(data.thumbnail)<0) ? <img src={data.thumbnail} {...styles.gif_thumb} onClick={this.toggleImage}/> : null }
+                  {!config.showFullImages && ignoreThumbs.indexOf(data.thumbnail)<0 ? <div {...styles.thumb_container}><img src={data.thumbnail} width={70} onClick={this.toggleImage}/></div> : null }
                   <div {...styles.title}>
                     <div {...styles.postMeta}>
                         {showSubreddit ? <Link {...styles.metaItem} {...styles.blue} to={`/r/${data.subreddit}`}>{data.subreddit_name_prefixed}</Link> : null }

@@ -4,33 +4,22 @@ import {
 
 export default function posts(state = {
     isFetching: false,
-    items: []
+    items: [],
+    after: null,
+    subreddit: null
 }, action) {
     switch (action.type) {
         case REQUEST_POSTS:
             return Object.assign({}, state, {
-                isFetching: true
+                isFetching: true,
+                items: action.subreddit === state.subreddit ? state.items : []
             })
         case RECEIVE_POSTS:
-            // let min = 1000000, max = 0;
-            // action.posts.data.children.map(post => {
-            //     if(post.data.ups < min) {
-            //         min = post.data.ups;
-            //     }
-            //     if(post.data.ups > max) {
-            //         max = post.data.ups;
-            //     }
-            // });
-            // let mid = (max - min)/2;
-            // const posts = action.posts;
-            // posts.data.children.map(post => {
-            //     return Object.assign({}, post, {
-            //         medianScore: post.data.ups >= mid ? 1 : 0
-            //     });
-            // });
             return Object.assign({}, state, {
                 isFetching: false,
-                items: action.posts
+                items: action.subreddit === state.subreddit ? state.items.concat(action.posts.data.children) : action.posts.data.children,
+                after: action.posts.data.after,
+                subreddit: action.subreddit
             })
         case FAILED_REQUEST_POSTS:
             return Object.assign({}, state, {

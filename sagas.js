@@ -2,11 +2,11 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import * as actions from './actions';
 import * as Api from './api';
 
-function* fetchPosts({ subreddit, auth }) {
+function* fetchPosts({ subreddit, after, auth }) {
     try {
         yield setTitle(subreddit);
-        const posts = yield call(Api.fetchPosts, subreddit, auth);
-        yield put({type: actions.RECEIVE_POSTS, posts, subreddit});
+        const posts = yield call(Api.fetchPosts, subreddit, after, auth);
+        yield put({type: actions.RECEIVE_POSTS, posts, subreddit, after});
     } catch (e) {
         yield put({type: actions.FAILED_REQUEST_POSTS, message: e.message});
         if(subreddit === 'frontpage') {

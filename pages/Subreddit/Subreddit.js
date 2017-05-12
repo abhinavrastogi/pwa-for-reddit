@@ -10,7 +10,8 @@ import * as styles from './SubredditStyles.js';
 class Subreddit extends Component {
     constructor() {
         super();
-        window.iw = window.innerWidth;
+        window.iw = window.innerWidth - 1;
+        this.loadMore = this.loadMore.bind(this);
     }
     componentDidMount() {
         const { dispatch, subreddit } = this.props;
@@ -18,21 +19,29 @@ class Subreddit extends Component {
             type: actions.REQUEST_POSTS,
             subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
         });
-        subreddit != 'frontpage' && dispatch({
+        subreddit != 'frontpage' && subreddit != 'popular' && dispatch({
             type: actions.REQUEST_ABOUT_SUBREDDIT,
             subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
         })
     }
-
+    loadMore() {
+      const { dispatch, subreddit, after, match } = this.props;
+      dispatch({
+          type: actions.REQUEST_POSTS,
+          subreddit: subreddit || (match && match.params && match.params.subreddit),
+          after: after
+      });
+    }
     render({posts, isFetching, subreddit, config}) {
         return <div {...styles.container}>
+            {posts
+                ? <div>
+                    {posts.map(post => <PostSummary data={post.data} showSubreddit={post.data.subreddit!=subreddit} config={config} />)}
+                    {!isFetching ? <a {...styles.loadMore} onClick={this.loadMore}>Load More</a> : null}
+                </div>
+                : null}
             {isFetching
                 ? <Loader />
-                : null}
-            {!isFetching && posts && posts.data
-                ? <div>
-                    {posts.data.children.map(post => <PostSummary data={post.data} showSubreddit={post.data.subreddit!=subreddit} config={config} />)}
-                </div>
                 : null}
         </div>
     }
@@ -43,6 +52,7 @@ function mapStateToProps(state, props) {
     return {
         posts: posts.items,
         isFetching: posts.isFetching,
+        after: posts.after,
         config
     }
 }

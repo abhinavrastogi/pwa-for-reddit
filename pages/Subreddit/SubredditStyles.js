@@ -4,6 +4,8 @@ export const container = css({
   color: '#ccc'
 });
 
-export const postsList = css({
-
+export const loadMore = css({
+  textAlign: 'center',
+  padding: '20px',
+  display: 'block'
 });

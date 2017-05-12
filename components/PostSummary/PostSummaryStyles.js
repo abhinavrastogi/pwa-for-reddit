@@ -75,11 +75,10 @@ export const titleText = css({
   marginTop: '8px'
 })
 
-export const gif_thumb = css({
-    width: '70px',
-    height: '70px',
-    marginRight: '6px'
-});
+export const thumb_container = css({
+  width: '70px',
+  marginRight: '6px'
+})
 
 export const postFooter = css({
     marginTop: '10px'
