@@ -48,32 +48,35 @@ toolbox.router.get('/images/*', toolbox.cacheFirst, {
         maxEntries: 5
     }
 });
-toolbox.router.get('/r/:subreddit/comments/:post_id/*', toolbox.fastest, {
+toolbox.router.get('/r/:subreddit/comments/:post_id/*', toolbox.cacheFirst, {
     origin: 'https://www.reddit.com',
     cache: {
         name: currentCaches['comments'],
-        maxEntries: 20
+        maxEntries: 20,
+				maxAgeSeconds: 1000
     }
 });
-toolbox.router.get('/r/*', toolbox.fastest, {
+toolbox.router.get('/r/*', toolbox.cacheFirst, {
     origin: 'https://www.reddit.com',
     cache: {
         name: currentCaches['posts'],
-        maxEntries: 20
+        maxEntries: 20,
+				maxAgeSeconds: 1000
     }
 });
-toolbox.router.get('/r/*', toolbox.fastest, {
+// toolbox.router.get('/r/*', toolbox.fastest, {
+//     origin: 'https://oauth.reddit.com',
+//     cache: {
+//         name: currentCaches['posts'],
+//         maxEntries: 20
+//     }
+// });
+toolbox.router.get('/', toolbox.cacheFirst, {
     origin: 'https://oauth.reddit.com',
     cache: {
         name: currentCaches['posts'],
-        maxEntries: 20
-    }
-});
-toolbox.router.get('/', toolbox.fastest, {
-    origin: 'https://oauth.reddit.com',
-    cache: {
-        name: currentCaches['posts'],
-        maxEntries: 10
+        maxEntries: 10,
+				maxAgeSeconds: 1000
     }
 });
 toolbox.router.get('/', toolbox.networkFirst, {

@@ -20,7 +20,7 @@ export default class PostSummary extends Component {
     }
     render({data, showSubreddit, config}, {fullImage}) {
         let img_url = '', img_height, gif_url = '';
-        const ignoreThumbs = ['default', 'self', 'nsfw', ''];
+        const ignoreThumbs = ['default', 'self', 'nsfw', '', 'spoiler'];
         if(data.preview) {
             let aspect_ratio = data.preview.images[0].source.height / data.preview.images[0].source.width;
             img_height = aspect_ratio * window.iw;
