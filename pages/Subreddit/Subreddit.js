@@ -13,13 +13,16 @@ class Subreddit extends Component {
         window.iw = window.innerWidth - 1;
         this.loadMore = this.loadMore.bind(this);
     }
+
     componentDidMount() {
         const { dispatch, subreddit } = this.props;
+        const ignoreAbout = ['frontpage', 'popular'];
+
         dispatch({
             type: actions.REQUEST_POSTS,
             subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
         });
-        subreddit != 'frontpage' && subreddit != 'popular' && dispatch({
+        ignoreAbout.indexOf(subreddit) < 0 && dispatch({
             type: actions.REQUEST_ABOUT_SUBREDDIT,
             subreddit: subreddit || (this.props.match && this.props.match.params && this.props.match.params.subreddit)
         })

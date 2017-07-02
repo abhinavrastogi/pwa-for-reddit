@@ -3,12 +3,15 @@ import { css } from 'glamor';
 export const headerContainer = css({
     display: 'flex',
     borderBottom: '1px solid #333',
-    padding: '0 1px'
+    padding: '0 1px',
+    position: 'sticky',
+    top: 0,
+    background: '#000'
 })
 
 export const title = css({
     flex: 1,
-    padding: '14px 0'
+    padding: '7px 0'
 })
 
 export const titleText = css({
@@ -24,7 +27,7 @@ export const subs = css({
 export const user = css({
     textDecoration: 'none',
     color: '#ccc',
-    padding: '18px 5px 15px 15px',
+    padding: '11px 5px 11px 11px',
     fontSize: 'smaller'
 })
 
@@ -38,7 +41,7 @@ export const sswitch = css({
   display: 'inline-block',
   width: '40px',
   height: '24px',
-  margin: '12px',
+  margin: '7px',
   ' input': {
       display: 'none',
       ':checked': {
@@ -83,7 +86,7 @@ export const inputSubreddit = css({
     padding: '3px 10px',
     color: '#fff',
     backgroundColor: '#000',
-    width: '86px',
-    margin: '13px',
+    width: '90px',
+    margin: '7px',
     textTransform: 'lowercase'
 })

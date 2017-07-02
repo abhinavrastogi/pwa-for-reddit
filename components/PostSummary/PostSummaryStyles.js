@@ -5,13 +5,6 @@ export const container = css({
     borderBottom:'1px dashed #333'
 });
 
-export const imageContainer = full => css({
-    marginTop: '10px',
-    overflow: 'hidden',
-    maxHeight: !full ? '150px' : null,
-    position: 'relative'
-});
-
 export const image = css({
     width: '100%'
 });
@@ -91,4 +84,9 @@ export const footerComments = css({
 export const selftext = css({
     paddingTop: '10px',
     textAlign: 'justify'
+})
+
+export const fullWidth = css({
+    width: '100%',
+    marginTop: '8px'
 })

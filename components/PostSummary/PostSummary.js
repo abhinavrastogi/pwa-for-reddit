@@ -32,7 +32,7 @@ export default class PostSummary extends Component {
         const renderFooter = <div {...styles.postFooter} {...styles.postMeta}>
           <Link to={data.permalink} {...styles.metaItem} {...styles.footerComments}>{formatToK(data.num_comments)} Comments</Link>
           <span {...styles.metaItem}>&bull;</span>
-          <span {...styles.votes} {...styles.metaItem}>{formatToK(data.ups)} votes</span>
+          <span {...styles.metaItem}>{formatToK(data.ups)} votes</span>
         </div>;
 
         return <div {...styles.container} {...styles.sticky(data.stickied)}>
@@ -51,15 +51,15 @@ export default class PostSummary extends Component {
                     {!config.showFullImages && !config.showSelfText ? renderFooter : null}
                   </div>
                 </div>
-                {(config.showFullImages || fullImage) && img_url && data.post_hint === 'image' && !gif_url ? <div {...styles.imageContainer(true)} onClick={this.toggleImage}>
-                  <img src={img_url} {...styles.image} />
+                {(config.showFullImages || fullImage) && img_url && data.post_hint === 'image' && !gif_url 
+                    ? <img src={img_url} {...styles.fullWidth} onClick={this.toggleImage} /> 
+                    : null }
+                {(config.showFullImages || fullImage) && gif_url ? <div onClick={this.toggleImage}>
+                    <img src={gif_url} {...styles.fullWidth} />
                 </div> : null }
-                {(config.showFullImages || fullImage) && gif_url ? <div {...styles.imageContainer(true)} onClick={this.toggleImage}>
-                    <img src={gif_url} {...styles.image} />
-                </div> : null }
-                {(config.showFullImages || fullImage) && !gif_url && data.post_hint === 'link' ? <div {...styles.imageContainer(true)} onClick={this.toggleImage}>
-                    <img src={img_url} {...styles.image} />
-                </div> : null }
+                {(config.showFullImages || fullImage) && !gif_url && data.post_hint === 'link' 
+                    ? <img src={img_url} {...styles.fullWidth} onClick={this.toggleImage} /> 
+                    : null}
                 {config.showSelfText && data.selftext ? <div {...styles.selftext}><Markup markup={data.selftext_html} type="html" /></div> : null}
                 {config.showSelfText || config.showFullImages ? renderFooter : null}
         </div>
