@@ -11,7 +11,7 @@ const App = () => (
   <Router>
 	<div>
 		<Route exact path="/" component={Subreddit} />
-		<Route exact path="/r/:subreddit" component={Subreddit}/>
+		<Route path="/r/:subreddit" component={Subreddit}/>
 	</div>
   </Router>
 )
