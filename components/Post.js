@@ -36,9 +36,9 @@ export default class Post extends React.Component {
 			<div style={{ display: 'flex' }}>
 				<PostContent>
 					<Meta>
-						<SubredditName>/r/{data.subreddit}</SubredditName> &bull; {formatTimeAgo(data.created_utc)} ago &bull; u/{data.author}
+						<Link to={`/r/${data.subreddit}`}><SubredditName>/r/{data.subreddit}</SubredditName></Link> &bull; {formatTimeAgo(data.created_utc)} ago &bull; u/{data.author}
 					</Meta>
-					<Title><Link to={data.permalink} style={{ color: '#eee' }}>{data.title}</Link></Title>
+					<Link to={data.permalink} style={{ color: '#eee' }}><Title>{data.title}</Title></Link>
 					<Meta>
 						{Number(data.score).toLocaleString()} votes &bull; {Number(data.num_comments).toLocaleString()} comments
 					</Meta>
@@ -90,9 +90,10 @@ const Meta = glam.div({
 })
 
 const SubredditName = glam.span({
-	color: '#0079d3'
+	color: '#0079d3',
+	padding: '5px 0'
 })
 
 const Title = glam.div({
-	margin: '5px 0'
+	padding: '5px 0'
 })
