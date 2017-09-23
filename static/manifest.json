@@ -1,0 +1,14 @@
+{
+	"name": "PWA For Reddit",
+	"short_name": "Reddit Reader",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "black",
+	"description": "A simple PWA reader for Readdit",
+	"icons": [{
+	  "src": "/images/redditlite.png",
+	  "sizes": "300x300",
+	  "type": "image/png"
+	}],
+	"theme_color": "black"
+  }
