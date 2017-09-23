@@ -7,6 +7,7 @@ import {
 
 import List from './components/List';
 import Comments from './components/Comments';
+import Header from './components/Header';
 
 const App = () => (
 	<Router>
