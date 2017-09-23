@@ -9,6 +9,8 @@ import List from './components/List';
 import Comments from './components/Comments';
 import Header from './components/Header';
 
+window.iw = window.innerWidth + 1;
+
 const App = () => (
 	<Router>
 		<div>

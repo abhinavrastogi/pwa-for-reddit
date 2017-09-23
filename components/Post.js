@@ -31,6 +31,16 @@ export default class Post extends React.Component {
 	render() {
 		const { data, hideThumbnail } = this.props;
 		const { showFullImage } = this.state;
+		let img_url = '', img_height, gif_url = '';
+
+		if (data.preview) {
+			let aspect_ratio = data.preview.images[0].source.height / data.preview.images[0].source.width;
+			img_height = aspect_ratio * window.iw;
+			img_url = data.preview.images[0].source.url;
+			if (data.preview.images[0].variants && data.preview.images[0].variants.gif) {
+				gif_url = data.preview.images[0].variants.gif.source.url;
+			}
+		}
 
 		return <PostContainer>
 			<div style={{ display: 'flex' }}>
@@ -49,12 +59,17 @@ export default class Post extends React.Component {
 					</ThumbContainer>
 					: null}
 			</div>
-			{showFullImage && data.preview && data.preview.images
-				? <img data-src={data.preview.images[0].source.url}
-					width='100%'
-					style={{ marginTop: '10px' }}
-					onClick={this.toggleFullImage}
-					ref={img => { this.img = img }} />
+
+			{showFullImage && img_url && data.post_hint === 'image' && !gif_url
+				? <img width="100%" style={{marginTop: '10px'}} data-src={img_url} onClick={this.toggleFullImage} ref={img => { this.img = img }} />
+				: null}
+			{showFullImage && gif_url
+				? <div onClick={this.toggleFullImage} style={{marginTop: '10px'}}>
+					<img width="100%" data-src={gif_url} ref={img => { this.img = img }} />
+				</div>
+				: null}
+			{showFullImage && !gif_url && data.post_hint === 'link' && img_url
+				? <img width="100%" style={{marginTop: '10px'}} data-src={img_url} onClick={this.toggleFullImage} ref={img => { this.img = img }} />
 				: null}
 		</PostContainer>
 	}
@@ -96,4 +111,9 @@ const SubredditName = glam.span({
 
 const Title = glam.div({
 	padding: '5px 0'
+})
+
+const FullImg = glam.img({
+	marginTop: '10px',
+	width: '100%'
 })

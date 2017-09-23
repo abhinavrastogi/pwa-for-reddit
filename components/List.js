@@ -25,7 +25,7 @@ export default class List extends Component {
 	}
 
 	componentDidMount() {
-		const fetchUrl = this.state.subreddit ? `https://www.reddit.com/r/${this.state.subreddit}.json` : 'https://www.reddit.com/.json';
+		const fetchUrl = this.state.subreddit ? `https://www.reddit.com/r/${this.state.subreddit}.json?raw_json=1` : 'https://www.reddit.com/.json?raw_json=1';
 
 		fetch(fetchUrl).then(res => res.json()).then(res => {
 			this.setState((prevState, props) => {
