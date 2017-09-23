@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import glam from 'glamorous';
+import { withRouter } from 'react-router-dom';
 
-export default class Header extends Component {
+class Header extends Component {
 	constructor(props) {
 		super(props);
 
@@ -11,6 +12,7 @@ export default class Header extends Component {
 
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.toggleCardView = this.toggleCardView.bind(this);
+		this.openSubreddit = this.openSubreddit.bind(this);
 	}
 	render() {
 		return <HeaderContainer>
@@ -18,9 +20,16 @@ export default class Header extends Component {
 			<MenuContainer>
 				<MenuIcon onClick={this.toggleMenu}>☰</MenuIcon>
 				{this.state.menuOpen ? <MenuContent>
-					<MenuItem onClick={this.toggleCardView}>{this.props.cardView ? 'Compact View' : 'Card View	'}</MenuItem>
+					<MenuItem>
+						<form onSubmit={this.openSubreddit} style={{margin: 0, padding: '10px'}}>
+							<SearchBox type='text' placeholder="Enter Subreddit" id="inputSubreddit" autoComplete="off" autoCapitalize="none" autoCorrect="off" />
+						</form>
+					</MenuItem>
+					<MenuItem onClick={this.toggleCardView}>
+						<MenuItemContent>{this.props.cardView ? 'Compact View' : 'Card View	'}</MenuItemContent>
+					</MenuItem>
 					{/* <MenuItem>Day Theme</MenuItem> */}
-				</MenuContent> : null}
+				</MenuContent> : null}	
 			</MenuContainer>
 		</HeaderContainer>
 	}
@@ -33,6 +42,12 @@ export default class Header extends Component {
 		this.toggleMenu();
 		this.props.toggleCardView();
 	}
+	openSubreddit(e) {
+        e.preventDefault();
+        let inp = document.querySelector('#inputSubreddit', e);
+		let sr = inp.value.trim();
+		sr && this.props.history.push(`/r/${sr}`);
+    }
 }
 
 const HeaderContainer = glam.div({
@@ -69,7 +84,22 @@ const MenuContent = glam.ul({
 })
 
 const MenuItem = glam.li({
-	padding: '20px',
 	textAlign: 'center',
 	borderBottom: '1px solid #000'
 })
+
+const MenuItemContent = glam.div({
+	padding: '20px'
+})
+
+const SearchBox = glam.input({
+	border: '1px solid #666',
+	outline: 'none',
+	width: '100%',
+	backgroundColor: '#333',
+	color: '#fff',
+	padding: '10px',
+	fontSize: '14px'
+})
+
+export default withRouter(props => <Header {...props} />)

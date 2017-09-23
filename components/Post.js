@@ -61,6 +61,9 @@ export default class Post extends React.Component {
 	toggleFullImage() {
 		this.setState({
 			showFullImage: !this.state.showFullImage
+		}, _ => {
+			this.thumb && window.observer.observe(this.thumb);
+			this.img && window.observer.observe(this.img);
 		})
 	}
 }

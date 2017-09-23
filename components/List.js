@@ -9,13 +9,19 @@ export default class List extends Component {
 		super(props);
 
 		let cardView = window.localStorage.getItem('cardview');
-
+		
 		this.state = {
 			subreddit: props.match.params.subreddit,
 			cardView: (cardView && cardView === 'true')
 		};
 
 		this.toggleCardView = this.toggleCardView.bind(this)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			subreddit: nextProps.match.params.subreddit
+		})
 	}
 
 	componentDidMount() {
