@@ -1,5 +1,5 @@
 {
-  "name": "reddit",
+  "name": "pwa-for-reddit",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "start": "npm run build && node server.js",
     "watch": "npm run clean && webpack -w"
   },
-  "author": "",
+  "author": "r.abhinav@gmail.com",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.7.0",
