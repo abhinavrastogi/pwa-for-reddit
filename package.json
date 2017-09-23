@@ -20,9 +20,7 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
-  },
-  "devDependencies": {
+    "redux": "^3.7.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-minify": "^0.2.0",
