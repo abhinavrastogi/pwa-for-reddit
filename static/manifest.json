@@ -2,7 +2,7 @@
 	"name": "PWA For Reddit",
 	"short_name": "Reddit Reader",
 	"start_url": "/",
-	"display": "standalone",
+	"display": "fullscreen",
 	"background_color": "black",
 	"description": "A simple PWA reader for Readdit",
 	"icons": [{
