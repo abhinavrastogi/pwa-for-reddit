@@ -1,11 +1,19 @@
-var express = require('express');
-var path = require('path');
-var app = express();
+const express = require('express');
+const fs = require('fs');
+const compression = require('compression');
 
-app.use(express.static('public'));
+const port = process.env.PORT || 8000;
+
+const app = express()
+
+app.use(compression());
+
+app.use(express.static('build'));
 
 app.get('*', (req, res) => {
-    res.type('html').sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+  res.type('html').send(fs.readFileSync('build/index.html'));
+})
 
-app.listen(3000);
+app.listen(port, _ => {
+  console.log('Server listening on port', port)
+});
