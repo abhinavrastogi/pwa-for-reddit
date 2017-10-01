@@ -11,7 +11,7 @@ export default class Comments extends Component {
 		this.state = {};
 	}
 	componentDidMount() {
-		fetch(`https://www.reddit.com${this.props.location.pathname}.json`).then(res => res.json()).then(res => {
+		fetch(`https://www.reddit.com${this.props.location.pathname}.json?raw_json=1`).then(res => res.json()).then(res => {
 			this.setState({
 				post: res[0].data.children[0].data,
 				comments: res[1].data.children
