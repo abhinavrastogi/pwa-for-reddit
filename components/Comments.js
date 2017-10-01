@@ -32,7 +32,7 @@ export default class Comments extends Component {
 
 const Comment = ({data}) => <li>
 	<CommentBody>
-		<Meta>u/{data.author} &bull; {formatTimeAgo(data.created_utc)} &bull; {data.score} votes</Meta>
+		<Meta>u/{data.author} &bull; {formatTimeAgo(data.created_utc)} &bull; {Number(data.score).toLocaleString()} votes</Meta>
 		{data.body}
 	</CommentBody>
 	{data.replies && data.replies.data.children.length 

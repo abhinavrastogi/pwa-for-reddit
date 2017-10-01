@@ -31,14 +31,19 @@ export default class Post extends React.Component {
 	render() {
 		const { data, hideThumbnail } = this.props;
 		const { showFullImage } = this.state;
-		let img_url = '', img_height, gif_url = '';
+		let img_url = '', img_height, gif_url = '', mp4_url = '';
 
 		if (data.preview) {
 			let aspect_ratio = data.preview.images[0].source.height / data.preview.images[0].source.width;
 			img_height = aspect_ratio * window.iw;
-			img_url = data.preview.images[0].source.url;
+			let img_resolutions = data.preview.images[0].resolutions;
+			img_url = img_resolutions[img_resolutions.length - 1].url;
 			if (data.preview.images[0].variants && data.preview.images[0].variants.gif) {
 				gif_url = data.preview.images[0].variants.gif.source.url;
+			}
+			if (data.preview.images[0].variants && data.preview.images[0].variants.mp4) {
+				let mp4_resolutions = data.preview.images[0].variants.mp4.resolutions;
+				mp4_url = mp4_resolutions[mp4_resolutions.length - 1].url;
 			}
 		}
 
@@ -60,16 +65,11 @@ export default class Post extends React.Component {
 					: null}
 			</div>
 
-			{showFullImage && img_url && data.post_hint === 'image' && !gif_url
-				? <img width="100%" style={{marginTop: '10px'}} data-src={img_url} onClick={this.toggleFullImage} ref={img => { this.img = img }} />
-				: null}
-			{showFullImage && gif_url
-				? <div onClick={this.toggleFullImage} style={{marginTop: '10px'}}>
-					<img width="100%" data-src={gif_url} ref={img => { this.img = img }} />
+			{showFullImage && (img_url || gif_url || mp4_url)
+				? <div onClick={this.toggleFullImage} style={{ height: `${img_height}px`, marginTop: '10px' }}>
+					{(img_url && !gif_url && !mp4_url) && <img width="100%" data-src={img_url} ref={img => { this.img = img }} />}
+					{mp4_url && <video id="sampleMovie" width="100%" controls loop autoPlay><source src={mp4_url} type="video/mp4" /></video>}
 				</div>
-				: null}
-			{showFullImage && !gif_url && data.post_hint === 'link' && img_url
-				? <img width="100%" style={{marginTop: '10px'}} data-src={img_url} onClick={this.toggleFullImage} ref={img => { this.img = img }} />
 				: null}
 		</PostContainer>
 	}
