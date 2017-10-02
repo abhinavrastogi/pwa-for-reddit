@@ -1,6 +1,7 @@
 import React from 'react';
 import glam from 'glamorous';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 import { formatTimeAgo } from './utils';
 
@@ -29,7 +30,7 @@ export default class Post extends React.Component {
 		})
 	}
 	render() {
-		const { data, hideThumbnail } = this.props;
+		const { data, hideThumbnail, showFullSelfText } = this.props;
 		const { showFullImage } = this.state;
 		let img_url = '', img_height, gif_url = '', mp4_url = '';
 
@@ -54,6 +55,15 @@ export default class Post extends React.Component {
 						<Link to={`/r/${data.subreddit}`}><SubredditName>/r/{data.subreddit}</SubredditName></Link> &bull; {formatTimeAgo(data.created_utc)} ago &bull; u/{data.author}
 					</Meta>
 					<Link to={data.permalink} style={{ color: '#eee' }}><Title>{data.title}</Title></Link>
+					{data.selftext
+						? <SelfText showFullSelfText={showFullSelfText}>
+							{showFullSelfText
+								? <ReactMarkdown source={data.selftext} />
+								: data.selftext
+							}
+
+						</SelfText>
+						: null}
 					<Meta>
 						{Number(data.score).toLocaleString()} votes &bull; {Number(data.num_comments).toLocaleString()} comments
 					</Meta>
@@ -101,7 +111,7 @@ const PostContent = glam.div({
 
 const Meta = glam.div({
 	color: '#888',
-	fontSize: '12px'
+	fontSize: 'smaller'
 })
 
 const SubredditName = glam.span({
@@ -112,6 +122,15 @@ const SubredditName = glam.span({
 const Title = glam.div({
 	padding: '5px 0'
 })
+
+const SelfText = glam.div({
+	fontSize: 'smaller',
+	color: '#bbb',
+	marginBottom: '5px',
+	overflow: 'hidden'
+}, ({ showFullSelfText }) => ({
+	maxHeight: showFullSelfText ? 'auto' : '45px'
+}))
 
 const FullImg = glam.img({
 	marginTop: '10px',

@@ -21,7 +21,7 @@ export default class Comments extends Component {
 	render() {
 		return this.state.comments && this.state.post
 			? <div>
-				<Post data={this.state.post} showFullImage hideThumbnail />
+				<Post data={this.state.post} showFullImage hideThumbnail showFullSelfText />
 				<TopComments>
 					{this.state.comments.map(({data}) => <Comment key={data.id} data={data} />)}
 				</TopComments>
@@ -60,6 +60,7 @@ const CommentBody = glam.div({
 })
 
 const Meta = glam.div({
-	fontSize: 'smaller',
-	color: '#888'
+	fontSize: '12px',
+	color: '#888',
+	marginBottom: '3px'
 })

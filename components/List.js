@@ -12,7 +12,8 @@ export default class List extends Component {
 		
 		this.state = {
 			subreddit: props.match.params.subreddit,
-			cardView: (cardView && cardView === 'true')
+			cardView: (cardView && cardView === 'true'),
+			loading: true
 		};
 
 		this.toggleCardView = this.toggleCardView.bind(this)
@@ -20,7 +21,8 @@ export default class List extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
-			subreddit: nextProps.match.params.subreddit
+			subreddit: nextProps.match.params.subreddit,
+			loading: true
 		})
 	}
 
@@ -30,7 +32,8 @@ export default class List extends Component {
 		fetch(fetchUrl).then(res => res.json()).then(res => {
 			this.setState((prevState, props) => {
 				return {
-					posts: res.data.children.map(child => child.data)
+					posts: res.data.children.map(child => child.data),
+					loading: false
 				}
 			});
 		});
@@ -39,7 +42,7 @@ export default class List extends Component {
 	render() {
 		return <div>
 			<Header title={this.state.subreddit} toggleCardView={this.toggleCardView} cardView={this.state.cardView} />
-			{this.state.posts
+			{this.state.posts && !this.state.loading
 				? this.state.posts.map(post => <Post key={post.title} data={post} showFullImage={this.state.cardView} />)
 				: <div className='loader'>Fetching Posts...</div>}
 		</div>

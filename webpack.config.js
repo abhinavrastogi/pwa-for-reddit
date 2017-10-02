@@ -16,7 +16,8 @@ let config = {
 			'react-router-dom',
 			'react-dom',
 			'glamorous',
-			'glamor'
+			'glamor',
+			'react-markdown'
 		]
 	},
 	"output": {

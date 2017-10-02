@@ -32,7 +32,6 @@ const options = {
 window.observer = new IntersectionObserver((entries, observer) => {
 	entries.forEach(entry => {
 		if (entry.isIntersecting) {
-			console.log('loading', entry);
 			entry.target.src = entry.target.dataset.src;
 			observer.unobserve(entry.target);
 		}
