@@ -61,7 +61,6 @@ export default class Post extends React.Component {
 								? <ReactMarkdown source={data.selftext} />
 								: data.selftext
 							}
-
 						</SelfText>
 						: null}
 					<Meta>
@@ -71,6 +70,7 @@ export default class Post extends React.Component {
 				{data.thumbnail && ignoredThumbs.indexOf(data.thumbnail) < 0 && !hideThumbnail
 					? <ThumbContainer onClick={this.toggleFullImage}>
 						<img data-src={data.thumbnail} width={100} ref={img => { this.thumb = img }} />
+						{gif_url || mp4_url ? <PlaySymbol>►</PlaySymbol> : null}
 					</ThumbContainer>
 					: null}
 			</div>
@@ -101,7 +101,8 @@ const PostContainer = glam.div({
 
 const ThumbContainer = glam.div({
 	width: '100px',
-	padding: '0 5px'
+	padding: '0 5px',
+	position: 'relative'
 })
 
 const PostContent = glam.div({
@@ -135,4 +136,15 @@ const SelfText = glam.div({
 const FullImg = glam.img({
 	marginTop: '10px',
 	width: '100%'
+})
+
+const PlaySymbol = glam.div({
+	position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(-50%)',
+    background: 'rgba(0,0,0,0.6)',
+    padding: '10px 11px 10px 13px',
+    borderRadius: '20px',
+    fontSize: '12px'
 })
