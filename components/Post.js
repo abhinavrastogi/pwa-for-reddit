@@ -68,7 +68,7 @@ export default class Post extends React.Component {
 						{Number(data.score).toLocaleString()} votes &bull; {Number(data.num_comments).toLocaleString()} comments
 					</Meta>
 				</PostContent>
-				{ignoredThumbs.indexOf(data.thumbnail) < 0 && !hideThumbnail
+				{data.thumbnail && ignoredThumbs.indexOf(data.thumbnail) < 0 && !hideThumbnail
 					? <ThumbContainer onClick={this.toggleFullImage}>
 						<img data-src={data.thumbnail} width={100} ref={img => { this.thumb = img }} />
 					</ThumbContainer>
@@ -115,7 +115,7 @@ const Meta = glam.div({
 })
 
 const SubredditName = glam.span({
-	color: '#0079d3',
+	color: '#6495ed',
 	padding: '5px 0'
 })
 
