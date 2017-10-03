@@ -1,11 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const precache = require('sw-precache-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
-const PROD = process.env.NODE_ENV==='production';
+const PROD = process.env.NODE_ENV === 'production';
 
 let config = {
 	"entry": {
@@ -56,12 +56,14 @@ let config = {
 			title: 'Reddit Reader',
 			template: 'index.ejs'
 		}),
-		new precache({
-			minify: PROD,
-			staticFileGlobsIgnorePatterns: [/\.html$/],
+		new workboxPlugin({
+			swDest: './build/service-worker.js',
+			skipWaiting: true,
+			clientsClaim: true,
+			ignoreUrlParametersMatching: [/^utm_/, /^raw_json$/],
 			runtimeCaching: [
 				{
-					urlPattern: /https:\/\/www\.reddit\.com\/.*/,
+					urlPattern: /.*\.json/,
 					handler: 'cacheFirst',
 					options: {
 						origin: 'https://www.reddit.com',
@@ -71,10 +73,6 @@ let config = {
 						}
 					}
 				}
-				// {
-				// 	urlPattern: /^\/$/,
-				// 	handler: 'fastest'
-				// }
 			]
 		})
 	]
