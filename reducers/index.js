@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import posts from './postsReducer'
-// import comments from './comments'
+import comments from './commentsReducer'
 
 const redditApp = combineReducers({
-  posts
+  posts,
+  comments
 })
 
 export default redditApp

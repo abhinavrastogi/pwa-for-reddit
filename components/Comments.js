@@ -1,47 +1,62 @@
 import React, { Component } from 'react';
 import glam from 'glamorous';
 import ReactMarkdown from 'react-markdown';
+import { connect } from 'react-redux';
 
+import { getComments } from '../actions/index';
 import Post from './Post';
-import {formatTimeAgo} from './utils';
+import { formatTimeAgo } from './utils';
 
-export default class Comments extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {};
-	}
+class Comments extends Component {
 	componentDidMount() {
-		fetch(`https://www.reddit.com${this.props.location.pathname}.json?raw_json=1`).then(res => res.json()).then(res => {
-			this.setState({
-				post: res[0].data.children[0].data,
-				comments: res[1].data.children
-			})
-		});
+		const { subreddit, id, title } = this.props.match.params;
+
+		this.props.dispatch(getComments(subreddit, id, title));
 	}
 	render() {
-		return this.state.comments && this.state.post
-			? <div>
-				<Post data={this.state.post} showFullImage hideThumbnail showFullSelfText />
-				<TopComments>
-					{this.state.comments.map(({data}) => <Comment key={data.id} data={data} />)}
+		const { post, comments, loading } = this.props;
+
+		return <div>
+			{post.id
+				? <Post data={post} showFullImage hideThumbnail showFullSelfText />
+				: null}
+			{comments.length
+				? <TopComments>
+					{comments.map(({ data }) => <Comment key={data.id} data={data} />)}
 				</TopComments>
-			</div>
-			: <div className='loader'>Loading comments...</div>
+				: null}
+			{loading
+				? <div className='loader'>Loading comments...</div>
+				: null}
+		</div>
 	}
 }
 
-const Comment = ({data}) => <li>
+const Comment = ({ data }) => <li>
 	<CommentBody>
 		<Meta>u/{data.author} &bull; {formatTimeAgo(data.created_utc)} &bull; {Number(data.score).toLocaleString()} votes &bull; {data.replies ? data.replies.data.children.length : '0'} replies</Meta>
 		{data.body ? <ReactMarkdown source={data.body} /> : null}
 	</CommentBody>
 	{data.replies && data.replies.data.children.length && !data.collapsed
-	? <Replies>
-		{data.replies.data.children.filter(child => child.kind == 't1').map(({data}) => <Comment key={data.id} data={data} />)}	
-	</Replies> 
-	: null}
+		? <Replies>
+			{data.replies.data.children.filter(child => child.kind == 't1').map(({ data }) => <Comment key={data.id} data={data} />)}
+		</Replies>
+		: null}
 </li>
+
+const mapStateToProps = (state, props) => {
+	const { posts, comments } = state
+
+	let cachedPost = posts.posts.filter(post => post.id === props.match.params.id);
+
+	return {
+		post: (cachedPost.length && cachedPost[0]) || comments.post,
+		comments: comments.comments,
+		loading: comments.loading
+	};
+}
+
+export default connect(mapStateToProps)(Comments);
 
 const TopComments = glam.ul({
 	listStyle: 'none',
