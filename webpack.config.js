@@ -53,7 +53,7 @@ let config = {
 			}
 		}),
 		new HtmlWebpackPlugin({
-			title: 'Reddit',
+			title: 'Reddit Reader',
 			template: 'index.ejs'
 		}),
 		new precache({
@@ -61,7 +61,7 @@ let config = {
 			staticFileGlobsIgnorePatterns: [/\.html$/],
 			runtimeCaching: [
 				{
-					urlPattern: /.*\.json$/,
+					urlPattern: /https:\/\/www\.reddit\.com\/.*/,
 					handler: 'cacheFirst',
 					options: {
 						origin: 'https://www.reddit.com',
@@ -71,6 +71,10 @@ let config = {
 						}
 					}
 				}
+				// {
+				// 	urlPattern: /^\/$/,
+				// 	handler: 'fastest'
+				// }
 			]
 		})
 	]
