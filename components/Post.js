@@ -33,6 +33,7 @@ export default class Post extends React.Component {
 		const { data, hideThumbnail, showFullSelfText } = this.props;
 		const { showFullImage } = this.state;
 		let img_url = '', img_height, gif_url = '', mp4_url = '';
+		let thumb_height;
 
 		if (data.preview) {
 			let aspect_ratio = data.preview.images[0].source.height / data.preview.images[0].source.width;
@@ -46,6 +47,11 @@ export default class Post extends React.Component {
 				let mp4_resolutions = data.preview.images[0].variants.mp4.resolutions;
 				mp4_url = mp4_resolutions[mp4_resolutions.length - 1].url;
 			}
+		}
+
+		if(data.thumbnail && data.thumbnail_height && data.thumbnail_width) {
+			let thumb_aspect_ratio = data.thumbnail_height / data.thumbnail_width;
+			thumb_height = thumb_aspect_ratio * 100;
 		}
 
 		return <PostContainer>
@@ -69,7 +75,7 @@ export default class Post extends React.Component {
 				</PostContent>
 				{data.thumbnail && ignoredThumbs.indexOf(data.thumbnail) < 0 && !hideThumbnail
 					? <ThumbContainer onClick={this.toggleFullImage}>
-						<img data-src={data.thumbnail} width={100} ref={img => { this.thumb = img }} />
+						<img data-src={data.thumbnail} height={thumb_height} ref={img => { this.thumb = img }} />
 						{gif_url || mp4_url ? <PlaySymbol>►</PlaySymbol> : null}
 					</ThumbContainer>
 					: null}
