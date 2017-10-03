@@ -21,13 +21,13 @@ class List extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.subreddit != this.props.subreddit) {
-			this.props.dispatch(getPosts(nextProps.subreddit));
+		if(nextProps.match.params.subreddit != this.props.match.params.subreddit) {
+			this.props.dispatch(getPosts(nextProps.match.params.subreddit));
 		}
 	}
 
 	componentDidMount() {
-		this.props.dispatch(getPosts(this.props.subreddit));
+		this.props.dispatch(getPosts(this.props.match.params.subreddit));
 	}
 
 	render() {

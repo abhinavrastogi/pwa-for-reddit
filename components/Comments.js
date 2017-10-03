@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { getComments } from '../actions/index';
 import Post from './Post';
+import Header from './Header';
 import { formatTimeAgo } from './utils';
 
 class Comments extends Component {
@@ -17,6 +18,7 @@ class Comments extends Component {
 		const { post, comments, loading } = this.props;
 
 		return <div>
+			<Header title={'Comments'} />
 			{post.id
 				? <Post data={post} showFullImage hideThumbnail showFullSelfText />
 				: null}

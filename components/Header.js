@@ -40,7 +40,7 @@ class Header extends Component {
 	}
 	toggleCardView() {
 		this.toggleMenu();
-		this.props.toggleCardView();
+		this.props.toggleCardView && this.props.toggleCardView();
 	}
 	openSubreddit(e) {
         e.preventDefault();
