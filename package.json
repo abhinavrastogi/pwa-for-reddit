@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf build/* || true",
     "build": "npm run clean && webpack",
-    "start": "npm run build && node server.js",
-    "watch": "npm run clean && webpack -w"
+    "postinstall": "npm run build",
+    "start": "node server.js",
+    "watch": "npm run build -- -w"
   },
   "author": "r.abhinav@gmail.com",
   "license": "ISC",
