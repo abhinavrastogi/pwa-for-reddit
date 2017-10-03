@@ -17,7 +17,10 @@ let config = {
 			'react-dom',
 			'glamorous',
 			'glamor',
-			'react-markdown'
+			'react-markdown',
+			'redux',
+			'react-redux',
+			'redux-thunk'
 		]
 	},
 	"output": {
