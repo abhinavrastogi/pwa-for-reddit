@@ -47,9 +47,9 @@ const Comment = ({ data }) => <li>
 </li>
 
 const mapStateToProps = (state, props) => {
-	const { posts, comments } = state
+	const { posts, comments, selectedSubreddit } = state
 
-	let cachedPost = posts.posts.filter(post => post.id === props.match.params.id);
+	let cachedPost = posts.posts[selectedSubreddit.id].filter(post => post.id === props.match.params.id);
 
 	return {
 		post: (cachedPost.length && cachedPost[0]) || comments.post,

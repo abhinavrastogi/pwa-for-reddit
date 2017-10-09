@@ -7,7 +7,7 @@ import {
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-// import { createLogger } from 'redux-logger';
+import { createLogger } from 'redux-logger';
 
 import redditApp from './reducers/index';
 
@@ -16,8 +16,8 @@ import Comments from './components/Comments';
 import Header from './components/Header';
 
 window.iw = window.innerWidth + 1;
-// const loggerMiddleware = createLogger();
-const store = createStore(redditApp, applyMiddleware(thunkMiddleware));
+const loggerMiddleware = createLogger();
+const store = createStore(redditApp, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 const App = () => (
 	<Provider store={store}>

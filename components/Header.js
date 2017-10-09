@@ -60,7 +60,7 @@ const HeaderContainer = glam.div({
 })
 
 const Title = glam.div({
-	padding: '17px 0',
+	padding: '17px 5px',
 	flex: 1
 })
 
@@ -80,7 +80,8 @@ const MenuContent = glam.ul({
 	margin: 0,
 	listStyle: 'none',
 	padding: 0,
-	fontSize: 'smaller'
+	fontSize: 'smaller',
+	zIndex: 1
 })
 
 const MenuItem = glam.li({

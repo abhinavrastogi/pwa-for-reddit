@@ -1,16 +1,29 @@
-export const getPosts = subreddit => (dispatch, getState) => {
+export const getPosts = _ => (dispatch, getState) => {
+	const { posts, selectedSubreddit } = getState();
+	const subreddit = selectedSubreddit.id;
+
+	if (posts.posts[subreddit] && posts.posts[subreddit].length) {
+		return dispatch({
+			type: 'GET_POSTS_CACHE_SUCCESS',
+			payload: posts.posts[subreddit],
+			subreddit
+		})
+	}
+
 	dispatch({
 		type: 'GET_POSTS_REQUEST'
 	});
 
-	const fetchUrl = subreddit ? `https://www.reddit.com/r/${subreddit}.json?raw_json=1` : 'https://www.reddit.com/.json?raw_json=1';
+	const subredditSlug = selectedSubreddit.title;
+	const fetchUrl = subredditSlug ? `https://www.reddit.com/r/${subredditSlug}.json?raw_json=1` : 'https://www.reddit.com/.json?raw_json=1';
 
 	return fetch(fetchUrl)
 		.then(res => res.json())
 		.then(res => {
 			return dispatch({
 				type: 'GET_POSTS_SUCCESS',
-				payload: res.data.children.map(child => child.data)
+				payload: res.data.children.map(child => child.data),
+				subreddit
 			})
 		});
 }
@@ -33,4 +46,13 @@ export const getComments = (subreddit, id, title) => (dispatch, getState) => {
 				}
 			})
 		});
+}
+
+export const selectSubreddit = subreddit => dispatch => {
+	dispatch({
+		type: 'SELECT_SUBREDDIT',
+		subreddit
+	})
+
+	return dispatch(getPosts());
 }
