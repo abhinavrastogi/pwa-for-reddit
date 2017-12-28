@@ -37,7 +37,7 @@ class List extends Component {
 		return <div>
 			<Header title={title} toggleCardView={this.toggleCardView} cardView={this.state.cardView} />
 			{posts && !loading
-				? posts.map(post => !post.over_18 ? <Post key={post.title} data={post} showFullImage={this.state.cardView} hideThumbnail={!this.state.cardView} /> : null)
+				? posts.map(post => !post.over_18 ? <Post key={post.title} data={post} showFullImage={this.state.cardView} hideThumbnail={this.state.cardView} /> : null)
 				: <div className='loader'>Fetching Posts...</div>}
 		</div>
 	}

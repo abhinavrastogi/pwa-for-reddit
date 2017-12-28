@@ -57,10 +57,7 @@ export default class Post extends React.Component {
 		return <PostContainer>
 			<div style={{ display: 'flex' }}>
 				<PostContent>
-					<Meta>
-						<Link to={`/r/${data.subreddit}`}><SubredditName>/r/{data.subreddit}</SubredditName></Link> &bull; {formatTimeAgo(data.created_utc)} ago &bull; u/{data.author}
-					</Meta>
-					<Link to={data.permalink} style={{ color: '#eee' }}><Title>{data.title}</Title></Link>
+					<Link to={data.permalink}><Title>{data.title}</Title></Link>
 					{data.selftext
 						? <SelfText showFullSelfText={showFullSelfText}>
 							{showFullSelfText
@@ -70,12 +67,15 @@ export default class Post extends React.Component {
 						</SelfText>
 						: null}
 					<Meta>
+						<Link to={`/r/${data.subreddit}`}><SubredditName>/r/{data.subreddit}</SubredditName></Link> &bull; {formatTimeAgo(data.created_utc)} ago
+					</Meta>
+					<Meta>
 						{Number(data.score).toLocaleString()} votes &bull; {Number(data.num_comments).toLocaleString()} comments
 					</Meta>
 				</PostContent>
 				{data.thumbnail && ignoredThumbs.indexOf(data.thumbnail) < 0 && !hideThumbnail
 					? <ThumbContainer onClick={this.toggleFullImage}>
-						<img data-src={data.thumbnail} height={thumb_height} ref={img => { this.thumb = img }} />
+						<img data-src={data.thumbnail} height={thumb_height} ref={img => { this.thumb = img }} style={{ borderRadius: '8px' }} />
 						{gif_url || mp4_url ? <PlaySymbol>►</PlaySymbol> : null}
 					</ThumbContainer>
 					: null}
@@ -100,9 +100,8 @@ export default class Post extends React.Component {
 }
 
 const PostContainer = glam.div({
-	marginBottom: '10px',
-	paddingBottom: '10px',
-	borderBottom: '1px dashed #444'
+	marginBottom: '12px',
+	paddingBottom: '12px'
 })
 
 const ThumbContainer = glam.div({
@@ -118,7 +117,8 @@ const PostContent = glam.div({
 
 const Meta = glam.div({
 	color: '#888',
-	fontSize: 'smaller'
+	fontSize: 'smaller',
+	padding: '0 0 8px 0'
 })
 
 const SubredditName = glam.span({
@@ -127,14 +127,15 @@ const SubredditName = glam.span({
 })
 
 const Title = glam.div({
-	padding: '5px 0'
+	padding: '0 0 8px 0'
 })
 
 const SelfText = glam.div({
 	fontSize: 'smaller',
-	color: '#bbb',
-	marginBottom: '5px',
-	overflow: 'hidden'
+	color: '#888',
+	marginBottom: '8px',
+	overflow: 'hidden',
+	maxWidth: '100vw'
 }, ({ showFullSelfText }) => ({
 	maxHeight: showFullSelfText ? 'auto' : '45px'
 }))
